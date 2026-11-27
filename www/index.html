@@ -150,6 +150,15 @@ body.kb .bnav,body.kb .footbar{display:none}
 .grab{width:40px;height:4px;border-radius:2px;background:var(--line2);margin:0 auto 12px}
 .sheet h3{font-size:17px;margin-bottom:12px}
 
+/* SETTINGS TILES */
+.tiles{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.tile{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0;width:100%;overflow:hidden;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;min-height:96px}
+.tile:active{background:#faf8f3}
+.tile i{font-size:24px;margin-bottom:2px}
+.tile b{font-size:14px;font-weight:600}
+.tile-v{color:var(--sub);font-size:12.5px;line-height:1.35;width:100%;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow-wrap:anywhere}
+.tile-hero{display:flex;align-items:center;gap:12px;text-align:left}
+.tile-hero img{width:50px;height:50px;border-radius:12px;object-fit:contain;background:#fff;border:1px solid var(--line);flex-shrink:0}
 /* REPORTS */
 .bars{display:flex;gap:8px;align-items:stretch;height:170px;margin-top:8px}
 .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
@@ -244,7 +253,9 @@ en:{
   offlineBadFile:'That is not a Raya Wood Works backup file.',offlineConfirm:'This backup has {n} quotations (saved {d}). Add them to this phone? Quotations already here are kept; the newest edit of each wins.',offlineRestored:'Backup restored · {n} new quotations added',
   backup:'Backup',offlineRemind:'No backup file in the last 7 days. Save one now and keep it in WhatsApp or Drive.',offlineInfo:'Quotations are stored only on this phone. If the phone is lost or the app is uninstalled, they can be brought back only from a backup file.',
   appUpdates:'App updates',versionLabel:'Version',updateBadge:'Update',updateChecking:'Checking for updates…',updateNone:'You have the latest version.',updateFailed:'Could not check for updates. Check the internet and try again.',updateOnlyApp:'Updates work in the installed Android app.',
-  updateTitle:'Update available',updateVersion:'New version {v}',updateSafe:'Your quotations stay on the phone. The update installs over this app.',updateDownload:'Download update',updateLater:'Later',updateAllow:'Allow "Install unknown apps" for Raya Wood Works, then come back and tap Download again.',updateProgress:'Downloading… {p}%',updateInstalling:'Download complete. Tap Install on the next screen.'
+  updateTitle:'Update available',updateVersion:'New version {v}',updateSafe:'Your quotations stay on the phone. The update installs over this app.',updateDownload:'Download update',updateLater:'Later',updateAllow:'Allow "Install unknown apps" for Raya Wood Works, then come back and tap Download again.',updateProgress:'Downloading… {p}%',updateInstalling:'Download complete. Tap Install on the next screen.',
+  tLetterhead:'PDF letterhead',tLetterheadSub:'Name and tagline',tContacts:'Contacts',tUpi:'UPI QR',tTerms:'Terms',tTermsCustom:'Custom terms',tTax:'GST and discount',tNumber:'Quote number',notSet:'Not set',off:'off',latest:'latest',nextIs:'Next {q}',clearAllSub:'Delete every quotation',
+  contactsSub:'Printed at the top of every PDF, in this order (up to 3).',taxSub:'Default for new quotations. Each quotation can still change it.',numberSub:'The next new quotation gets this number.',languageSub:'App and PDF language',settingSaved:'Saved · new PDFs use this',pctInvalid:'Enter a percentage from 0 to 100.',numberInvalid:'Enter a number from 1.'
 },
 ta:{
   navHome:'முகப்பு',navQuotes:'விலைகள்',navCustomers:'நபர்கள்',navPayments:'கட்டணம்',
@@ -300,7 +311,9 @@ ta:{
   offlineBadFile:'இது Raya Wood Works காப்பு கோப்பு அல்ல.',offlineConfirm:'இந்தக் காப்பில் {n} விலைப்புள்ளிகள் உள்ளன ({d} சேமித்தது). இந்த கைபேசியில் சேர்க்கவா? இங்குள்ளவை அப்படியே இருக்கும்; ஒவ்வொன்றிலும் புதிய மாற்றம் வைக்கப்படும்.',offlineRestored:'காப்பு மீட்டெடுக்கப்பட்டது · {n} புதிய விலைப்புள்ளிகள்',
   backup:'காப்பு',offlineRemind:'கடந்த 7 நாட்களில் காப்பு கோப்பு இல்லை. இப்போதே சேமித்து WhatsApp அல்லது Drive-ல் வைத்துக்கொள்ளுங்கள்.',offlineInfo:'விலைப்புள்ளிகள் இந்த கைபேசியில் மட்டுமே இருக்கும். கைபேசி தொலைந்தாலோ app நீக்கப்பட்டாலோ, காப்பு கோப்பிலிருந்து மட்டுமே திரும்பப் பெற முடியும்.',
   appUpdates:'App புதுப்பிப்பு',versionLabel:'பதிப்பு',updateBadge:'புதியது',updateChecking:'புதுப்பிப்பைத் தேடுகிறது…',updateNone:'சமீபத்திய பதிப்பு ஏற்கனவே உள்ளது.',updateFailed:'புதுப்பிப்பைச் சரிபார்க்க முடியவில்லை. இணையத்தைச் சரிபார்த்து மீண்டும் முயலவும்.',updateOnlyApp:'Install செய்த Android app-ல் மட்டும் புதுப்பிப்பு வேலை செய்யும்.',
-  updateTitle:'புதிய பதிப்பு உள்ளது',updateVersion:'புதிய பதிப்பு {v}',updateSafe:'உங்கள் விலைப்புள்ளிகள் கைபேசியிலேயே இருக்கும். இந்த app மேல் புதுப்பிப்பு நிறுவப்படும்.',updateDownload:'புதுப்பிப்பைப் பதிவிறக்கு',updateLater:'பிறகு',updateAllow:'Raya Wood Works-க்கு "Install unknown apps" அனுமதி கொடுத்து, திரும்பி வந்து மீண்டும் பதிவிறக்கு அழுத்தவும்.',updateProgress:'பதிவிறக்குகிறது… {p}%',updateInstalling:'பதிவிறக்கம் முடிந்தது. அடுத்த திரையில் Install அழுத்தவும்.'
+  updateTitle:'புதிய பதிப்பு உள்ளது',updateVersion:'புதிய பதிப்பு {v}',updateSafe:'உங்கள் விலைப்புள்ளிகள் கைபேசியிலேயே இருக்கும். இந்த app மேல் புதுப்பிப்பு நிறுவப்படும்.',updateDownload:'புதுப்பிப்பைப் பதிவிறக்கு',updateLater:'பிறகு',updateAllow:'Raya Wood Works-க்கு "Install unknown apps" அனுமதி கொடுத்து, திரும்பி வந்து மீண்டும் பதிவிறக்கு அழுத்தவும்.',updateProgress:'பதிவிறக்குகிறது… {p}%',updateInstalling:'பதிவிறக்கம் முடிந்தது. அடுத்த திரையில் Install அழுத்தவும்.',
+  tLetterhead:'PDF தலைப்பு',tLetterheadSub:'பெயர் மற்றும் துணைத் தலைப்பு',tContacts:'தொடர்புகள்',tUpi:'UPI QR',tTerms:'நிபந்தனைகள்',tTermsCustom:'உங்கள் நிபந்தனைகள்',tTax:'ஜிஎஸ்டி மற்றும் தள்ளுபடி',tNumber:'விலைப்புள்ளி எண்',notSet:'அமைக்கவில்லை',off:'அணைப்பு',latest:'சமீபத்தியது',nextIs:'அடுத்தது {q}',clearAllSub:'எல்லா விலைப்புள்ளிகளையும் நீக்கு',
+  contactsSub:'ஒவ்வொரு PDF-இன் மேலும் இந்த வரிசையில் வரும் (3 வரை).',taxSub:'புதிய விலைப்புள்ளிகளுக்கான இயல்பு. ஒவ்வொரு விலைப்புள்ளியிலும் மாற்றலாம்.',numberSub:'அடுத்த புதிய விலைப்புள்ளிக்கு இந்த எண் வரும்.',languageSub:'App மற்றும் PDF மொழி',settingSaved:'சேமிக்கப்பட்டது · இனி வரும் PDF-களில் வரும்',pctInvalid:'0 முதல் 100 வரை சதவீதம் உள்ளிடவும்.',numberInvalid:'1 அல்லது அதற்கு மேல் எண் உள்ளிடவும்.'
 }};
 const TYPE_DEFAULTS={en:['Wardrobe','Kitchen','Cot','Door','TV unit','Pooja unit'],ta:['அலமாரி','சமையலறை','கட்டில்','கதவு','TV யூனிட்','பூஜை அறை']};
 const PAY_MODES=['cash','upi','bank','cheque'];
@@ -496,7 +509,6 @@ function renderDrawer(){
 // ═══════════════ RENDER ═══════════════
 function render(){
   const {r,arg}=parseHash();
-  if(r!=='settings')bizDraft=null;
   route=r;routeArg=arg;lastRoute=r;lastPath=(location.hash||'#/home').replace(/^#\/?/,'')||'home';
   if(r==='edit'&&!q){q=newQuoteObj();markClean()}
   const pages={home:pageHome,quotes:pageQuotes,customers:pageCustomers,customer:pageCustomer,payments:pagePayments,reports:pageReports,backup:pageBackup,settings:pageSettings,edit:pageEditor};
@@ -680,69 +692,90 @@ function pageBackup(){
   };
 }
 
-// ── SETTINGS ──
+// ── SETTINGS (tile grid; each tile opens a small sheet with its own Save) ──
 function pageSettings(){
-  getAppVersion().then(v=>{const el=document.getElementById('app-version');if(el)el.textContent=v?t('versionLabel')+' '+v.versionName+' ('+v.versionCode+')':t('updateOnlyApp')});
-  const f=bizForm();
-  const tog=(k)=>`<button class="toggle ${settings[k]?'on':''}" onclick="updateSetting('${k}',!settings.${k});render()" aria-label="${esc(k)}"></button>`;
+  getAppVersion().then(v=>{const el=document.getElementById('tile-version');if(el)el.textContent=v?(pendingUpdate?tf('updateVersion',{v:pendingUpdate.name}):'v'+v.versionName+' · '+t('latest')):t('updateOnlyApp')});
+  const contacts=(settings.contacts||[]).filter(c=>c.name||c.phone);
+  const sched=paymentSchedule(defaultNotes());
+  const offlineLast=localStorage.getItem('srw_offline_last');
+  const stale=quotes.length&&(!offlineLast||daysSince(new Date(offlineLast))>=7);
+  const tile=(onclick,icon,color,title,value,extra='')=>`<button class="tile" onclick="${onclick}" ${extra}><i class="ti ${icon}" style="color:${color}"></i><b>${esc(title)}</b><span class="tile-v">${value}</span></button>`;
   return {
     top:topMenu(t('settings')),
-    body:`<div class="sec">${esc(t('pdfDetails'))}</div>
-      <div class="card">
-        <div class="m" style="margin-bottom:12px">${esc(t('pdfDetailsSub'))}</div>
-        <div class="field"><label>${esc(t('bizName'))}</label><input class="inp" id="bf-name" value="${esc(f.bizName)}" oninput="bizEdited()"></div>
-        <div class="field"><label>${esc(t('bizTag'))}</label><input class="inp" id="bf-tag" value="${esc(f.bizTag)}" oninput="bizEdited()"></div>
-        <label class="lbl">${esc(t('contactsOnPdf'))}</label>
-        ${f.contacts.map((c,i)=>`<div class="bf-contact" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 36px;gap:8px;margin-bottom:8px;align-items:center">
-          <input class="inp bf-cn" value="${esc(c.name||'')}" placeholder="${esc(t('contactName'))}" oninput="bizEdited()">
-          <input class="inp bf-cp" type="tel" inputmode="tel" value="${esc(c.phone||'')}" placeholder="98765 43210" oninput="bizEdited()">
-          <button class="icon-btn" style="width:36px;height:36px;font-size:18px;color:var(--red)" onclick="removeContactRow(${i})" aria-label="${esc(t('deleteItem'))}"><i class="ti ti-x"></i></button></div>`).join('')}
-        ${f.contacts.length<3?`<button class="link" style="margin:0 0 14px" onclick="addContactRow()">+ ${esc(t('addContact'))}</button>`:''}
-        <div class="field"><label>${esc(t('upiId'))}</label><input class="inp" id="bf-upi" value="${esc(f.upiId)}" placeholder="name@okaxis" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email" oninput="bizEdited()"><div class="m mt4">${esc(t('upiIdHint'))}</div></div>
-        <div class="field"><label>${esc(t('upiName'))}</label><input class="inp" id="bf-upiname" value="${esc(f.upiName)}" placeholder="${esc(f.bizName)}" oninput="bizEdited()"></div>
-        <div class="field"><label>${esc(t('defaultNotes'))}</label><textarea class="inp" id="bf-notes" placeholder="${esc(builtInNotes())}" oninput="bizEdited()">${esc(f.defaultNotes)}</textarea><div class="m mt4">${esc(t('defaultNotesHint'))}</div></div>
-        <div class="err" id="bf-err">${bizDraft?esc(t('unsavedChanges')):''}</div>
-        <button class="btn btn-primary" onclick="saveBizForm()"><i class="ti ti-device-floppy"></i>${esc(t('savePdfDetails'))}</button>
-      </div>
-      <div class="sec">${esc(t('quoteDefaults'))}</div>
-      <div class="card" style="padding-top:2px;padding-bottom:2px">
-        <div class="srow"><span>${esc(t('gstPct'))}</span><span class="row"><input class="inp pct" type="number" inputmode="decimal" value="${esc(settings.gstVal)}" onchange="updateSetting('gstVal',parseFloat(this.value)||0)">${tog('gst')}</span></div>
-        <div class="srow"><span>${esc(t('discountPct'))}</span><span class="row"><input class="inp pct" type="number" inputmode="decimal" value="${esc(settings.discVal)}" onchange="updateSetting('discVal',parseFloat(this.value)||0)">${tog('disc')}</span></div>
-        <div class="srow"><span>${esc(t('nextNumber'))}</span><span class="row"><span class="m">Q</span><input class="inp pct" type="number" inputmode="numeric" min="1" value="${esc(settings.quotNum)}" onchange="updateSetting('quotNum',Math.max(1,parseInt(this.value)||1));render()"></span></div>
-      </div>
-      <div class="sec">${esc(t('app'))}</div>
-      <div class="card" style="padding-top:2px;padding-bottom:2px">
-        <div class="srow"><span>${esc(t('language'))}</span><div class="seg" style="width:170px"><button class="${language==='ta'?'on':''}" onclick="setLanguage('ta')">தமிழ்</button><button class="${language==='en'?'on':''}" onclick="setLanguage('en')">English</button></div></div>
-        <button class="srow" onclick="go('backup')"><span style="text-align:left">${esc(t('backup'))}<div class="m">${esc(offlineLastText())}</div></span><i class="ti ti-chevron-right" style="color:var(--muted)"></i></button>
-        <button class="srow" onclick="checkForUpdate(true)"><span style="text-align:left">${esc(t('appUpdates'))}<div class="m" id="app-version">${esc(t('versionLabel'))} …</div></span>${pendingUpdate?`<span class="pill due">${esc(t('updateBadge'))}</span>`:'<i class="ti ti-refresh" style="color:var(--muted)"></i>'}</button>
-        <button class="srow" style="color:var(--red)" onclick="clearAllQuotes()"><span>${esc(t('clearAll'))}</span><i class="ti ti-trash"></i></button>
+    body:`<button class="card tile-hero" onclick="openSettingSheet('letterhead')">
+        <img src="assets/raya-emblem.png" alt=""><div style="min-width:0;flex:1"><div class="b ell" style="font-size:16px">${esc(settings.bizName||'')}</div><div class="m ell">${esc(settings.bizTag||t('bizSub'))}</div></div><i class="ti ti-pencil" style="color:var(--muted);font-size:18px"></i></button>
+      <div class="tiles">
+        ${tile("openSettingSheet('letterhead')",'ti-file-text','#854F0B',t('tLetterhead'),esc(t('tLetterheadSub')))}
+        ${tile("openSettingSheet('contacts')",'ti-phone','#0C447C',t('tContacts'),esc(contacts.length?contacts.map(c=>toTitle(c.name||c.phone)).join(', '):t('notSet')))}
+        ${tile("openSettingSheet('upi')",'ti-qrcode','#27500A',t('tUpi'),esc(settings.upiId||t('notSet')))}
+        ${tile("openSettingSheet('terms')",'ti-notes','#5F5E5A',t('tTerms'),esc(sched.length?sched.map(x=>fmtTs(x.pct)).join(' / '):t('tTermsCustom')))}
+        ${tile("openSettingSheet('tax')",'ti-receipt-tax','#993C1D',t('tTax'),esc((settings.gst?'GST '+settings.gstVal+'%':t('gst')+' '+t('off'))+(settings.disc?' · −'+settings.discVal+'%':'')))}
+        ${tile("openSettingSheet('number')",'ti-hash','#534AB7',t('tNumber'),esc(tf('nextIs',{q:nextQuoteNo()})))}
+        ${tile("openSettingSheet('language')",'ti-language','#0F6E56',t('language'),language==='ta'?'தமிழ்':'English')}
+        ${tile("go('backup')",'ti-device-floppy','#854F0B',t('backup'),esc(offlineLastText()),stale?'style="background:var(--due-bg);border-color:#efd9a8"':'')}
+        ${tile('checkForUpdate(true)','ti-download','#C9A227',t('appUpdates'),'<span id="tile-version">…</span>'+(pendingUpdate?' <span class="pill due">'+esc(t('updateBadge'))+'</span>':''))}
+        ${tile('clearAllQuotes()','ti-trash','var(--red)',t('clearAll'),esc(t('clearAllSub')))}
       </div>`
   };
 }
-// ── PDF details form: edits stay in a draft until "Save PDF details" ──
-let bizDraft=null;
-function bizForm(){return bizDraft||{bizName:settings.bizName||'',bizTag:settings.bizTag||'',contacts:(settings.contacts||[]).map(c=>({name:c.name||'',phone:c.phone||''})),upiId:settings.upiId||'',upiName:settings.upiName||'',defaultNotes:settings.defaultNotes||''}}
-function readBizForm(){
-  const v=id=>document.getElementById(id)?.value??'';
-  bizDraft={bizName:v('bf-name'),bizTag:v('bf-tag'),upiId:v('bf-upi'),upiName:v('bf-upiname'),defaultNotes:v('bf-notes'),
-    contacts:[...document.querySelectorAll('.bf-contact')].map(r=>({name:r.querySelector('.bf-cn').value,phone:r.querySelector('.bf-cp').value}))};
-  return bizDraft;
+let contactDraft=[];
+function sheetHead(icon,color,title,sub){return `<h3><i class="ti ${icon}" style="color:${color}"></i> ${esc(title)}</h3>${sub?`<div class="m" style="margin:-6px 0 12px">${esc(sub)}</div>`:''}`}
+function sheetSave(kind){return `<div class="err" id="st-err"></div><button class="btn btn-primary" onclick="saveSettingSheet('${kind}')"><i class="ti ti-device-floppy"></i>${esc(t('save'))}</button>`}
+function settingSheetHtml(kind){
+  if(kind==='letterhead')return sheetHead('ti-file-text','#854F0B',t('tLetterhead'),t('pdfDetailsSub'))+
+    `<div class="field"><label>${esc(t('bizName'))}</label><input class="inp" id="st-name" value="${esc(settings.bizName||'')}"></div>
+     <div class="field"><label>${esc(t('bizTag'))}</label><input class="inp" id="st-tag" value="${esc(settings.bizTag||'')}"></div>`+sheetSave(kind);
+  if(kind==='contacts')return sheetHead('ti-phone','#0C447C',t('tContacts'),t('contactsSub'))+
+    contactDraft.map((c,i)=>`<div class="st-contact" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 36px;gap:8px;margin-bottom:8px;align-items:center">
+      <input class="inp st-cn" value="${esc(c.name||'')}" placeholder="${esc(t('contactName'))}">
+      <input class="inp st-cp" type="tel" inputmode="tel" value="${esc(c.phone||'')}" placeholder="98765 43210">
+      <button class="icon-btn" style="width:36px;height:36px;font-size:18px;color:var(--red)" onclick="editContactRows(-1,${i})" aria-label="${esc(t('deleteItem'))}"><i class="ti ti-x"></i></button></div>`).join('')+
+    (contactDraft.length<3?`<button class="link" style="margin:2px 0 6px" onclick="editContactRows(1)">+ ${esc(t('addContact'))}</button>`:'')+sheetSave(kind);
+  if(kind==='upi')return sheetHead('ti-qrcode','#27500A',t('tUpi'),t('upiIdHint'))+
+    `<div class="field"><label>${esc(t('upiId'))}</label><input class="inp" id="st-upi" value="${esc(settings.upiId||'')}" placeholder="name@okaxis" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email"></div>
+     <div class="field"><label>${esc(t('upiName'))}</label><input class="inp" id="st-upiname" value="${esc(settings.upiName||'')}" placeholder="${esc(settings.bizName||'')}"></div>`+sheetSave(kind);
+  if(kind==='terms')return sheetHead('ti-notes','#5F5E5A',t('tTerms'),t('defaultNotesHint'))+
+    `<div class="field"><textarea class="inp" id="st-notes" style="min-height:130px" placeholder="${esc(builtInNotes())}">${esc(settings.defaultNotes||'')}</textarea></div>`+sheetSave(kind);
+  if(kind==='tax')return sheetHead('ti-receipt-tax','#993C1D',t('tTax'),t('taxSub'))+
+    `<div class="srow"><span>${esc(t('gstPct'))}</span><span class="row"><input class="inp pct" id="st-gst" type="number" inputmode="decimal" value="${esc(settings.gstVal)}"><button class="toggle ${settings.gst?'on':''}" id="st-gst-on" onclick="this.classList.toggle('on')" aria-label="GST"></button></span></div>
+     <div class="srow" style="margin-bottom:8px"><span>${esc(t('discountPct'))}</span><span class="row"><input class="inp pct" id="st-disc" type="number" inputmode="decimal" value="${esc(settings.discVal)}"><button class="toggle ${settings.disc?'on':''}" id="st-disc-on" onclick="this.classList.toggle('on')" aria-label="Discount"></button></span></div>`+sheetSave(kind);
+  if(kind==='number')return sheetHead('ti-hash','#534AB7',t('tNumber'),t('numberSub'))+
+    `<div class="field"><label>${esc(t('nextNumber'))}</label><div class="row" style="justify-content:flex-start"><span class="b" style="font-size:18px">Q</span><input class="inp" id="st-num" type="number" inputmode="numeric" min="1" value="${esc(settings.quotNum)}" style="width:130px;font-size:18px"></div></div>`+sheetSave(kind);
+  if(kind==='language')return sheetHead('ti-language','#0F6E56',t('language'),t('languageSub'))+
+    `<div class="g2"><button class="btn ${language==='ta'?'btn-primary':'btn-line'}" onclick="setLanguage('ta');closeOverlay()">தமிழ்</button><button class="btn ${language==='en'?'btn-primary':'btn-line'}" onclick="setLanguage('en');closeOverlay()">English</button></div>`;
+  return '';
 }
-function bizEdited(){readBizForm();const e=document.getElementById('bf-err');if(e)e.textContent=t('unsavedChanges')}
-function addContactRow(){const d=readBizForm();if(d.contacts.length<3)d.contacts.push({name:'',phone:''});render()}
-function removeContactRow(i){const d=readBizForm();d.contacts.splice(i,1);render()}
-function saveBizForm(){
-  const d=readBizForm(),err=document.getElementById('bf-err');
-  const name=d.bizName.trim();
-  if(!name){err.textContent=t('bizNameRequired');return}
-  const contacts=d.contacts.map(c=>({name:c.name.trim(),phone:c.phone.trim()})).filter(c=>c.name||c.phone);
-  if(contacts.some(c=>!c.name||c.phone.replace(/\D/g,'').length<10)){err.textContent=t('contactInvalid');return}
-  const upi=d.upiId.trim();
-  if(upi&&!isValidUpi(upi)){err.textContent=t('upiInvalid');return}
-  Object.assign(settings,{bizName:name,bizTag:d.bizTag.trim(),contacts,upiId:upi,upiName:d.upiName.trim(),defaultNotes:d.defaultNotes});
-  saveSettings();bizDraft=null;render();toast(t('pdfDetailsSaved'));
+function openSettingSheet(kind){
+  if(kind==='contacts')contactDraft=(settings.contacts||[]).map(c=>({name:c.name||'',phone:c.phone||''}));
+  openSheet(settingSheetHtml(kind));
 }
-function setLanguage(v){if(route==='settings'&&document.getElementById('bf-name'))readBizForm();language=v==='ta'?'ta':'en';localStorage.setItem('srw_language',language);document.documentElement.lang=language;render();if(overlay==='drawer')renderDrawer()}
+function readContactRows(){contactDraft=[...document.querySelectorAll('.st-contact')].map(r=>({name:r.querySelector('.st-cn').value,phone:r.querySelector('.st-cp').value}))}
+function editContactRows(add,removeAt){
+  readContactRows();
+  if(add>0&&contactDraft.length<3)contactDraft.push({name:'',phone:''});
+  if(add<0)contactDraft.splice(removeAt,1);
+  document.querySelector('#sheet .sheet-in').innerHTML='<div class="grab"></div>'+settingSheetHtml('contacts');
+}
+function saveSettingSheet(kind){
+  const v=id=>(document.getElementById(id)?.value??'').trim(),err=m=>{document.getElementById('st-err').textContent=m};
+  if(kind==='letterhead'){if(!v('st-name'))return err(t('bizNameRequired'));settings.bizName=v('st-name');settings.bizTag=v('st-tag')}
+  if(kind==='contacts'){
+    readContactRows();
+    const list=contactDraft.map(c=>({name:c.name.trim(),phone:c.phone.trim()})).filter(c=>c.name||c.phone);
+    if(list.some(c=>!c.name||c.phone.replace(/\D/g,'').length<10))return err(t('contactInvalid'));
+    settings.contacts=list;
+  }
+  if(kind==='upi'){if(v('st-upi')&&!isValidUpi(v('st-upi')))return err(t('upiInvalid'));settings.upiId=v('st-upi');settings.upiName=v('st-upiname')}
+  if(kind==='terms')settings.defaultNotes=document.getElementById('st-notes').value;
+  if(kind==='tax'){
+    const g=parseFloat(v('st-gst')),d=parseFloat(v('st-disc'));
+    if(!(g>=0&&g<=100)||!(d>=0&&d<=100))return err(t('pctInvalid'));
+    Object.assign(settings,{gstVal:g,discVal:d,gst:document.getElementById('st-gst-on').classList.contains('on'),disc:document.getElementById('st-disc-on').classList.contains('on')});
+  }
+  if(kind==='number'){const n=parseInt(v('st-num'),10);if(!(n>=1))return err(t('numberInvalid'));settings.quotNum=n}
+  saveSettings();closeOverlay();render();toast(t('settingSaved'));
+}
+function setLanguage(v){language=v==='ta'?'ta':'en';localStorage.setItem('srw_language',language);document.documentElement.lang=language;render();if(overlay==='drawer')renderDrawer()}
 function clearAllQuotes(){
   if(!quotes.length||!confirm(t('clearAllConfirm')))return;
   markDeleted(quotes.map(e=>e.id));quotes=[];persistQuotes();q=null;render();toast(t('cleared'));
