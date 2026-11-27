@@ -1,0 +1,25 @@
+{
+  "name": "android-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "android:sync": "cap sync android",
+    "android:build": "cd android && gradlew.bat assembleDebug"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@capacitor/android": "^8.6.3",
+    "@capacitor/core": "^8.6.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.6.3",
+    "@tabler/icons-webfont": "^2.44.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
+    "qrcode-generator": "^1.4.4"
+  }
+}

@@ -1,0 +1,14 @@
+node_modules/
+*.log
+
+# Local-only files (previews, old copies, editor/agent settings)
+backup/
+.claude/
+
+# Signing keys never go in the repo (CI gets the key from a GitHub secret)
+*.keystore
+*.jks
+*.keystore.b64
+
+# Built APKs (published as GitHub Releases instead)
+*.apk

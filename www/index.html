@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#3d2312">
+<title>Raya Wood Works</title>
+<link rel="stylesheet" href="vendor/tabler/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --blue:#1F3864;--blue2:#2E75B6;--gold:#C9A227;--gold-ink:#2b2200;--sky:#BDD7EE;
+  --bg:#f5f3ee;--card:#fff;--line:#e7e2d6;--line2:#d9d3c4;--text:#1d1d1b;--sub:#6b6b66;--muted:#8a877f;
+  --due-bg:#FAEEDA;--due:#854F0B;--paid-bg:#EAF3DE;--paid:#27500A;--draft-bg:#F1EFE8;--draft:#444441;
+  --late-bg:#FCEBEB;--late:#791F1F;--info-bg:#EBF4FF;--info:#0C447C;--green:#0F6E56;--ok:#3B6D11;
+  --wa:#25D366;--wa-ink:#06381c;--red:#A32D2D;
+  --safe-top:env(safe-area-inset-top,0px);--safe-bot:env(safe-area-inset-bottom,0px);
+}
+html,body{background:var(--bg)}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,'Noto Sans Tamil',Arial,sans-serif;color:var(--text);font-size:14px;min-height:100vh;overscroll-behavior-y:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;text-align:inherit}
+input,textarea,select{font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+
+/* HEAD */
+/* Dark walnut wood grain (header + sidebar top) */
+.walnut{background-color:#4a2c17;background-image:repeating-linear-gradient(92deg,rgba(255,255,255,.05) 0 2px,transparent 2px 9px),repeating-linear-gradient(88deg,rgba(0,0,0,.18) 0 1px,transparent 1px 14px),repeating-linear-gradient(90.6deg,rgba(255,220,170,.06) 0 3px,transparent 3px 37px),linear-gradient(180deg,#6b4226,#3d2312)}
+.head{position:sticky;top:0;z-index:50;color:#fff;border-bottom:3px solid var(--gold);box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.topbar{padding:calc(8px + var(--safe-top)) 6px 8px;display:flex;align-items:center;gap:2px;min-height:58px;max-width:760px;margin:0 auto}
+.topbar .title{flex:1;font-family:Georgia,'Times New Roman',serif;color:#F2D27A;letter-spacing:.3px;font-size:18px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 6px}
+.topbar .tag{font-size:12px;color:#e8d3b0;padding:0 10px;white-space:nowrap}
+.icon-btn{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.icon-btn:active{background:rgba(255,255,255,.15)}
+.topbar .icon-btn{color:#f3e6cf}
+.brand{flex:1;display:flex;align-items:center;gap:10px;min-width:0;padding:0 4px}
+.brand img{width:38px;height:38px;border-radius:9px;object-fit:contain;background:#fff;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.35)}
+.brand .name{font-family:Georgia,'Times New Roman',serif;color:#F2D27A;font-size:18px;font-weight:600;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand .sub{font-size:10.5px;letter-spacing:1.2px;color:#e8d3b0;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase}
+.stepper{display:flex;align-items:center;gap:6px;padding:0 16px 12px;font-size:12.5px;color:#e8d3b0;max-width:760px;margin:0 auto}
+.stepper button{font-size:12.5px;white-space:nowrap;color:#e8d3b0}
+.stepper .on{color:#F2D27A;font-weight:700}
+.stepper .ln{flex:1;height:2px;background:rgba(255,255,255,.25);border-radius:1px;min-width:12px}
+.stepper .ln.ok{background:var(--gold)}
+
+/* LAYOUT */
+main{max-width:560px;margin:0 auto;padding:12px 12px 110px}
+body.editor main{padding-bottom:170px}
+.card{display:block;width:100%;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+button.card:active,a.card:active{background:#faf8f3}
+.row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.b{font-weight:600}
+.m{color:var(--sub);font-size:12.5px}
+.ell{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.mt4{margin-top:4px}.mt8{margin-top:8px}.mt12{margin-top:12px}
+.sec-h{display:flex;justify-content:space-between;align-items:center;margin:16px 2px 8px;font-weight:600}
+.sec-h button{color:var(--blue2);font-size:13px;font-weight:500}
+.sec{color:var(--blue2);font-size:12px;font-weight:700;margin:18px 4px 6px;text-transform:uppercase;letter-spacing:.5px}
+.pill{font-size:11.5px;padding:2px 9px;border-radius:10px;white-space:nowrap;font-weight:500}
+.pill.due{background:var(--due-bg);color:var(--due)}
+.pill.paid{background:var(--paid-bg);color:var(--paid)}
+.pill.draft{background:var(--draft-bg);color:var(--draft)}
+.pill.late{background:var(--late-bg);color:var(--late)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
+.stat .v{font-size:19px;font-weight:700;margin-top:2px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.chip{border:1px solid var(--line2);background:#fff;border-radius:16px;padding:6px 12px;font-size:13px}
+.chip.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.search{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:0 12px;margin-bottom:10px;color:var(--muted)}
+.search input{flex:1;border:none;outline:none;padding:11px 0;background:transparent;font-size:15px;color:var(--text);min-width:0}
+.empty{text-align:center;color:var(--sub);padding:36px 16px}
+.empty i{font-size:42px;display:block;margin-bottom:10px;color:var(--line2)}
+.av{width:42px;height:42px;border-radius:50%;background:var(--info-bg);color:var(--info);display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;font-size:14px}
+.progress{height:8px;background:#efeae0;border-radius:4px;overflow:hidden}
+.progress>div{height:100%;background:var(--ok);border-radius:4px}
+
+/* FORMS */
+.field{margin-bottom:12px}
+.field label,.lbl{display:block;font-size:12.5px;color:var(--sub);margin-bottom:5px}
+.inp{width:100%;background:#fff;border:1.5px solid var(--line2);border-radius:10px;padding:11px 12px;font-size:16px;outline:none}
+.inp:focus{border-color:var(--blue2)}
+textarea.inp{resize:vertical;min-height:96px;line-height:1.5}
+.pct{width:70px;padding:7px 8px;font-size:15px;text-align:center}
+.g2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.sheet{overflow-x:hidden}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;padding:13px;font-weight:600;font-size:15px;width:100%;text-align:center}
+.btn:active{transform:scale(.98)}
+.btn i{font-size:19px}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-gold{background:var(--gold);color:var(--gold-ink)}
+.btn-wa{background:var(--wa);color:var(--wa-ink)}
+.btn-green{background:var(--green);color:#fff}
+.btn-soft{background:var(--info-bg);color:var(--info)}
+.btn-danger{background:var(--late-bg);color:var(--red)}
+.btn-line{background:#fff;border:1.5px solid var(--line2);color:var(--blue)}
+.dashed{display:block;width:100%;border:1.5px dashed var(--blue2);color:var(--blue2);border-radius:14px;padding:14px;text-align:center;font-weight:600;background:transparent}
+.link{color:var(--blue2);font-size:12.5px;font-weight:500}
+.toggle{width:46px;height:26px;background:#d9d3c4;border-radius:13px;position:relative;flex-shrink:0;transition:background .2s}
+.toggle.on{background:var(--blue)}
+.toggle::after{content:'';position:absolute;width:20px;height:20px;background:#fff;border-radius:50%;top:3px;left:3px;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.toggle.on::after{left:23px}
+.seg{display:flex;border:1.5px solid var(--line2);border-radius:10px;overflow:hidden;background:#fff}
+.seg button{flex:1;padding:9px 0;font-size:14px;text-align:center;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:none}
+.seg .on{background:var(--blue);color:#fff}
+.num{display:flex;align-items:center;border:1.5px solid var(--line2);border-radius:10px;background:#fff;overflow:hidden}
+.num button{width:44px;height:46px;font-size:22px;color:var(--blue);text-align:center;flex-shrink:0}
+.num button:active{background:var(--info-bg)}
+.num input{flex:1;min-width:0;border:none;text-align:center;font-size:17px;font-weight:600;outline:none;padding:10px 0;background:transparent}
+.calc{background:var(--info-bg);color:var(--info);border-radius:12px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;margin:14px 0}
+.srow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #f0ece2;width:100%}
+.srow:last-child{border-bottom:none}
+.err{color:var(--red);font-size:12.5px;min-height:16px;margin:6px 0}
+
+/* NAV + FOOT */
+.bnav{position:fixed;left:0;right:0;bottom:0;z-index:40;border-top:3px solid var(--gold);box-shadow:0 -2px 10px rgba(0,0,0,.25);padding:6px 4px calc(8px + var(--safe-bot))}
+.bnav-in{display:flex;justify-content:space-around;align-items:flex-end;max-width:560px;margin:0 auto}
+.bnav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11.5px;color:#d9c4a3;padding:2px 0}
+.bnav i{font-size:23px}
+.bnav button span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px}
+.bnav .on{color:#F2D27A;font-weight:700}
+.bnav .on i{text-shadow:0 0 8px rgba(242,210,122,.45)}
+.bnav .fab{flex:0 0 auto;width:58px;height:58px;border-radius:50%;background:linear-gradient(180deg,#e0bb45,#b8901c);color:#3d2312;justify-content:center;margin:-30px 6px 0;border:4px solid #4a2c17;box-shadow:0 0 0 2px var(--gold),0 3px 8px rgba(0,0,0,.35)}
+.bnav .fab i{font-size:28px}
+.footbar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fff;border-top:1px solid var(--line);padding:10px 12px calc(10px + var(--safe-bot))}
+.footbar-in{max-width:560px;margin:0 auto}
+.mini-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:8px}
+.mini-actions button{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:12px;color:var(--sub);padding:4px 0;border-radius:8px}
+.mini-actions button:active{background:var(--info-bg)}
+.mini-actions i{font-size:21px;color:var(--blue)}
+body.kb .bnav,body.kb .footbar{display:none}
+
+/* OVERLAYS */
+.scrim{position:fixed;inset:0;background:rgba(20,18,14,.5);z-index:80;opacity:0;pointer-events:none;transition:opacity .2s}
+.scrim.show{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;bottom:0;left:0;width:min(82vw,320px);background:#fff;z-index:90;transform:translateX(-102%);transition:transform .22s ease;display:flex;flex-direction:column;overflow-y:auto}
+.drawer.show{transform:none}
+.drawer-head{color:#fff;border-bottom:3px solid var(--gold);padding:calc(22px + var(--safe-top)) 18px 16px}
+.drawer-head .b{font-family:Georgia,'Times New Roman',serif;color:#F2D27A}
+.drawer-head img{width:58px;height:58px;border-radius:12px;object-fit:contain;background:#fff;margin-bottom:10px;display:block}
+.dl{display:flex;align-items:center;gap:14px;padding:13px 20px;font-size:15px;width:calc(100% - 12px)}
+.dl i{font-size:21px;color:var(--sub)}
+.dl.on{background:var(--info-bg);color:var(--info);font-weight:700;border-radius:0 24px 24px 0}
+.dl.on i{color:var(--info)}
+.dl:active{background:#f4f1ea}
+.drawer-foot{margin-top:auto;padding:14px 20px calc(14px + var(--safe-bot));font-size:12.5px;color:var(--sub);border-top:1px solid var(--line)}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:90;background:#fff;border-radius:20px 20px 0 0;max-height:92vh;overflow-y:auto;transform:translateY(105%);transition:transform .22s ease;padding:10px 16px calc(16px + var(--safe-bot))}
+.sheet.show{transform:none}
+.sheet-in{max-width:560px;margin:0 auto}
+.grab{width:40px;height:4px;border-radius:2px;background:var(--line2);margin:0 auto 12px}
+.sheet h3{font-size:17px;margin-bottom:12px}
+
+/* REPORTS */
+.bars{display:flex;gap:8px;align-items:stretch;height:170px;margin-top:8px}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bar-pair{flex:1;width:100%;display:flex;align-items:flex-end;justify-content:center;gap:3px}
+.bar{width:38%;border-radius:4px 4px 0 0;min-height:2px}
+.bar.q{background:var(--blue)}.bar.r{background:var(--ok)}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--sub);margin-top:8px}
+.legend span::before{content:'';display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px;background:var(--c)}
+
+/* A4 */
+#a4-off{position:fixed;left:-9999px;top:0;width:794px;background:#fff;font-family:Arial,sans-serif;pointer-events:none}
+#a4-page{width:794px;min-height:1123px;padding:50px;display:flex;flex-direction:column}
+.thumb{width:72px;height:102px;overflow:hidden;border:1px solid var(--line2);border-radius:4px;background:#fff;flex-shrink:0;position:relative}
+.thumb>div{width:794px;min-height:1123px;display:flex;flex-direction:column;transform:scale(.0907);transform-origin:0 0;position:absolute;top:0;left:0;padding:50px;font-family:Arial,sans-serif}
+.pv-box{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:6px;background:#fff}
+.pv-box>div{width:794px;min-height:1123px;display:flex;flex-direction:column;padding:50px;transform-origin:0 0;position:absolute;top:0;left:0;font-family:Arial,sans-serif}
+
+.toast{position:fixed;bottom:calc(100px + var(--safe-bot));left:50%;transform:translateX(-50%) translateY(30px);opacity:0;background:#1d1d1b;color:#fff;padding:10px 20px;border-radius:24px;font-size:13.5px;z-index:120;transition:all .25s;max-width:90vw;text-align:center;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.status-line{font-size:12.5px;color:var(--sub);text-align:center;min-height:16px;margin-top:6px}
+</style>
+<script type="module" src="vendor/native-plugins.js"></script>
+</head>
+<body>
+<div class="head walnut" id="head"><div class="topbar" id="topbar"></div><div class="stepper" id="stepper" style="display:none"></div></div>
+<main id="view"></main>
+<div class="footbar" id="footbar" style="display:none"><div class="footbar-in" id="footbar-in"></div></div>
+<nav class="bnav walnut" id="bnav"><div class="bnav-in" id="bnav-in"></div></nav>
+<div class="scrim" id="scrim" onclick="closeOverlay()"></div>
+<aside class="drawer" id="drawer" aria-label="Menu"></aside>
+<div class="sheet" id="sheet" role="dialog"></div>
+<div id="a4-off"><div id="a4-page"></div></div>
+<div class="toast" id="toast"></div>
+
+<script src="vendor/html2canvas.min.js"></script>
+<script src="vendor/jspdf.umd.min.js"></script>
+<script src="vendor/qrcode.js"></script>
+<script>
+// ═══════════════ TEXT ═══════════════
+const TEXT={
+en:{
+  navHome:'Home',navQuotes:'Quotes',navCustomers:'Customers',navPayments:'Payments',
+  home:'Home',quotes:'Quotes',quotations:'Quotations',customers:'Customers',payments:'Payments',reports:'Reports',settings:'Settings',menu:'Menu',back:'Back',close:'Close',search:'Search',
+  bizSub:'Wood works and interior',
+  quotedMonth:'Quoted this month',toCollect:'To collect',quotesMonth:'Quotes this month',receivedMonth:'Received this month',
+  recent:'Recent',seeAll:'See all',startFirst:'Create your first quotation',startFirstSub:'Tap the + button to start.',newQuotation:'New quotation',
+  due:'Due',paid:'Paid',draft:'Draft',late:'Late',dueSuffix:'due',all:'All',
+  searchQuotes:'Site, phone or Q number',noMatch:'No quotations match.',
+  searchCustomers:'Name or phone',noCustomers:'Customers appear here after you save a quotation.',nQuotes:'{n} quotes',oneQuote:'1 quote',
+  call:'Call',whatsapp:'WhatsApp',newQuote:'New quote',totalBusiness:'Total business',balanceDue:'Balance due',
+  toCollectFrom:'To collect from {n} sites',collectedPct:'{p}% of quoted value collected',pending:'Pending',received:'Received',
+  daysPending:'{n} days pending',noPending:'No pending payments.',noReceived:'No payments recorded yet.',
+  last6:'Last 6 months',quotedLbl:'Quoted',receivedLbl:'Received',byStatus:'By status',topCustomers:'Top customers',avgQuote:'Average quotation',nothingYet:'Nothing to show yet.',
+  stepCustomer:'Customer',stepItems:'Items',stepReview:'Review',
+  pickCustomer:'Pick saved customer',siteName:'Site name',place:'Place',phone:'Phone',validTill:'Valid till',
+  sitePlaceholder:'Ravi house',placePlaceholder:'Karur',
+  nextItems:'Next · add items',next:'Next',nItems:'{n} items',oneItem:'1 item',addItem:'Add item',editItem:'Edit item',saveItem:'Save item',deleteItem:'Delete item',
+  firstItem:'Add the first item',firstItemSub:'Wardrobe, kitchen, door… with size and rate.',
+  type:'Type',typePlaceholder:'Type or pick above',widthFt:'Width (ft)',heightFt:'Height (ft)',ratePerSqft:'₹ per sqft',qty:'Quantity',lastUsed:'Last used ₹{v}',sqft:'sqft',
+  itemIncomplete:'Enter size and rate first.',
+  pdfPreview:'PDF preview',tapToView:'Tap to view full page',subtotal:'Subtotal',discount:'Discount',gst:'GST',total:'Total',
+  record:'Record',recordPayment:'Record payment',receivedAmt:'Received ₹{v}',dueAmt:'Due ₹{v}',amount:'Amount',mode:'Mode',date:'Date',note:'Note',notePlaceholder:'Advance',savePayment:'Save payment',
+  mode_cash:'Cash',mode_upi:'UPI',mode_bank:'Bank',mode_cheque:'Cheque',full:'Full',
+  notesTerms:'Notes / terms',edit:'Edit',deleteQuote:'Delete quotation',
+  saveAndSend:'Save and send',save:'Save',pdf:'PDF',image:'Image',print:'Print',
+  siteRequired:'Enter the site name first.',needItems:'Add at least one item.',
+  saved:'Saved {q}',updated:'Updated {q}',paymentAdded:'Payment saved',paymentTooHigh:'Amount is more than the balance due.',enterAmount:'Enter a valid amount.',fullyPaid:'This quotation is fully paid.',
+  deleteConfirm:'Delete quotation {q}?',deleted:'Quotation deleted',deletePaymentConfirm:'Delete this payment?',
+  discardConfirm:'Discard your unsaved changes?',
+  business:'Business',bizName:'Business name',bizTag:'Tagline',bizPhones:'Phone lines (one per line)',defaultNotes:'Default notes / terms',defaultNotesHint:'Leave empty to use the standard 30 / 50 / 20 terms.',
+  quoteDefaults:'Quotation defaults',gstPct:'GST %',discountPct:'Discount %',nextNumber:'Next quotation number',app:'App',language:'Language',clearAll:'Clear all quotations',clearAllConfirm:'Delete ALL saved quotations from this phone? Save a backup file first if you may need them.',cleared:'All quotations cleared',
+  
+  
+  
+  
+  pdfPreparing:'Preparing PDF…',imagePreparing:'Preparing image…',sharePreparing:'Preparing PDF to share…',pdfSaved:'PDF saved',imageSaved:'Image saved',shareFailed:'Could not share the file.',
+  saveOrShare:'Save or share',whatsappShare:'Share quotation',printViaShare:'Choose a printer or PDF app to print',pdfDownloadedAttach:'PDF downloaded. Attach it in WhatsApp.',
+  quotationNumber:'Quotation',siteShare:'Site',totalReceived:'Received',
+  a4Site:'SITE NAME',a4Place:'PLACE',a4Sno:'S.NO',a4Type:'TYPE',a4Size:'SIZE',a4TSize:'T.SIZE (sqft)',a4Price:'PRICE/sqft',a4Qty:'QTY',a4TPrice:'T.PRICE (₹)',a4Total:'TOTAL AMOUNT',a4Notes:'NOTES / TERMS',a4Date:'Date',a4Valid:'Valid Till',a4Thanks:'Thank you for your business!',a4Sign:'Authorised Signature',a4Received:'Total received',a4Balance:'Balance due',
+  item:'Item',newReady:'New quotation',
+  pdfQuotation:'QUOTATION',pdfFor:'Quotation for',pdfNo:'Quotation no.',pdfDate:'Date',pdfValid:'Valid till',pdfDesc:'Description',pdfSize:'Size',pdfSqft:'Sqft',pdfRate:'Rate ₹',pdfQty:'Qty',pdfAmount:'Amount ₹',pdfFt:'ft',pdfWords:'Amount in words',pdfSchedule:'Payment schedule',pdfGrand:'GRAND TOTAL',pdfTerms:'Terms and notes',pdfDisclaimer:'This is a quotation, not a tax invoice. Prices are valid till the date shown above.',pdfForBiz:'For {b}',pdfThanks:'Thank you for choosing {b}',pdfPage:'Page {i} of {n}',
+  upiId:'UPI ID',upiIdHint:'A scan-to-pay QR code for this UPI ID is added to every quotation PDF.',upiInvalid:'That UPI ID doesn\'t look right. Example: name@okaxis',upiName:'Name shown in UPI apps',pdfScanPay:'Scan to pay',pdfUpiId:'UPI ID',pdfUpiApps:'GPay · PhonePe · Paytm · any UPI app',
+  unit:'Unit',unit_sqft:'Sqft',unit_rft:'Running ft',unit_nos:'Nos',unit_ls:'Lumpsum',u_sqft:'sqft',u_rft:'rft',u_nos:'nos',u_ls:'Lumpsum',lengthFt:'Length (ft)',ratePerRft:'₹ per running ft',ratePerNo:'₹ per piece',lumpAmount:'Amount ₹',pdfMeasure:'Total',
+  pdfDetails:'PDF details',pdfDetailsSub:'Name and contacts printed on the quotation PDF. Tap Save — every PDF made after that uses these.',contactsOnPdf:'Contacts on PDF',contactName:'Name',addContact:'Add contact',savePdfDetails:'Save PDF details',pdfDetailsSaved:'Saved. New PDFs will use these details.',bizNameRequired:'Enter the business name.',contactInvalid:'Each contact needs a name and a 10-digit phone number.',unsavedChanges:'Changes not saved yet.',
+  
+  
+  
+  
+  
+  offlineTitle:'Backup file',offlineSub:'Saves all quotations and settings as one file. Keep it in WhatsApp, your Drive app or phone storage. On a new phone, tap Restore from file and pick it. No Google setup needed.',
+  offlineSave:'Save backup file',offlineRestore:'Restore from file',offlineLast:'Last saved {t}',offlineNever:'No backup file saved yet',offlineSaved:'Backup file saved',
+  offlineBadFile:'That is not a Raya Wood Works backup file.',offlineConfirm:'This backup has {n} quotations (saved {d}). Add them to this phone? Quotations already here are kept; the newest edit of each wins.',offlineRestored:'Backup restored · {n} new quotations added',
+  backup:'Backup',offlineRemind:'No backup file in the last 7 days. Save one now and keep it in WhatsApp or Drive.',offlineInfo:'Quotations are stored only on this phone. If the phone is lost or the app is uninstalled, they can be brought back only from a backup file.',
+  appUpdates:'App updates',versionLabel:'Version',updateBadge:'Update',updateChecking:'Checking for updates…',updateNone:'You have the latest version.',updateFailed:'Could not check for updates. Check the internet and try again.',updateOnlyApp:'Updates work in the installed Android app.',
+  updateTitle:'Update available',updateVersion:'New version {v}',updateSafe:'Your quotations stay on the phone. The update installs over this app.',updateDownload:'Download update',updateLater:'Later',updateAllow:'Allow "Install unknown apps" for Raya Wood Works, then come back and tap Download again.',updateProgress:'Downloading… {p}%',updateInstalling:'Download complete. Tap Install on the next screen.'
+},
+ta:{
+  navHome:'முகப்பு',navQuotes:'விலைகள்',navCustomers:'நபர்கள்',navPayments:'கட்டணம்',
+  home:'முகப்பு',quotes:'விலைப்புள்ளி',quotations:'விலைப்புள்ளிகள்',customers:'வாடிக்கையாளர்',payments:'கட்டணம்',reports:'அறிக்கைகள்',settings:'அமைப்புகள்',menu:'மெனு',back:'பின்',close:'மூடு',search:'தேடு',
+  bizSub:'மரவேலை மற்றும் உள் அலங்காரம்',
+  quotedMonth:'இந்த மாத விலைப்புள்ளி',toCollect:'வசூலிக்க வேண்டியது',quotesMonth:'இந்த மாத எண்ணிக்கை',receivedMonth:'இந்த மாதம் பெற்றது',
+  recent:'சமீபத்தியவை',seeAll:'அனைத்தும்',startFirst:'முதல் விலைப்புள்ளியை உருவாக்குங்கள்',startFirstSub:'தொடங்க + பொத்தானை அழுத்தவும்.',newQuotation:'புதிய விலைப்புள்ளி',
+  due:'நிலுவை',paid:'செலுத்தப்பட்டது',draft:'வரைவு',late:'தாமதம்',dueSuffix:'நிலுவை',all:'அனைத்தும்',
+  searchQuotes:'தளம், தொலைபேசி அல்லது Q எண்',noMatch:'பொருந்தும் விலைப்புள்ளி இல்லை.',
+  searchCustomers:'பெயர் அல்லது தொலைபேசி',noCustomers:'விலைப்புள்ளி சேமித்ததும் வாடிக்கையாளர்கள் இங்கே வருவார்கள்.',nQuotes:'{n} விலைப்புள்ளிகள்',oneQuote:'1 விலைப்புள்ளி',
+  call:'அழை',whatsapp:'WhatsApp',newQuote:'புதியது',totalBusiness:'மொத்த வணிகம்',balanceDue:'மீதமுள்ள தொகை',
+  toCollectFrom:'{n} தளங்களில் வசூலிக்க வேண்டியது',collectedPct:'விலைப்புள்ளி மதிப்பில் {p}% வசூல்',pending:'நிலுவை',received:'பெற்றவை',
+  daysPending:'{n} நாட்களாக நிலுவை',noPending:'நிலுவை கட்டணம் இல்லை.',noReceived:'இன்னும் கட்டணம் பதிவு செய்யவில்லை.',
+  last6:'கடந்த 6 மாதங்கள்',quotedLbl:'விலைப்புள்ளி',receivedLbl:'பெற்றது',byStatus:'நிலை வாரியாக',topCustomers:'முன்னணி வாடிக்கையாளர்கள்',avgQuote:'சராசரி விலைப்புள்ளி',nothingYet:'இன்னும் காட்ட எதுவும் இல்லை.',
+  stepCustomer:'வாடிக்கையாளர்',stepItems:'பொருட்கள்',stepReview:'சரிபார்',
+  pickCustomer:'சேமித்த வாடிக்கையாளரைத் தேர்வு செய்',siteName:'தளத்தின் பெயர்',place:'இடம்',phone:'தொலைபேசி',validTill:'செல்லுபடி தேதி',
+  sitePlaceholder:'ரவி வீடு',placePlaceholder:'கரூர்',
+  nextItems:'அடுத்து · பொருட்கள்',next:'அடுத்து',nItems:'{n} பொருட்கள்',oneItem:'1 பொருள்',addItem:'பொருள் சேர்',editItem:'பொருளைத் திருத்து',saveItem:'சேமி',deleteItem:'பொருளை நீக்கு',
+  firstItem:'முதல் பொருளைச் சேர்க்கவும்',firstItemSub:'அலமாரி, சமையலறை, கதவு… அளவு மற்றும் விலையுடன்.',
+  type:'வகை',typePlaceholder:'தட்டச்சு செய்யவும் அல்லது மேலே தேர்வு செய்யவும்',widthFt:'அகலம் (அடி)',heightFt:'உயரம் (அடி)',ratePerSqft:'சதுர அடிக்கு ₹',qty:'எண்ணிக்கை',lastUsed:'கடைசியாக ₹{v}',sqft:'ச.அடி',
+  itemIncomplete:'முதலில் அளவு மற்றும் விலையை உள்ளிடவும்.',
+  pdfPreview:'PDF முன்னோட்டம்',tapToView:'முழு பக்கத்தைப் பார்க்க அழுத்தவும்',subtotal:'உபமொத்தம்',discount:'தள்ளுபடி',gst:'ஜிஎஸ்டி',total:'மொத்தம்',
+  record:'பதிவு',recordPayment:'கட்டணம் பதிவு',receivedAmt:'பெற்றது ₹{v}',dueAmt:'நிலுவை ₹{v}',amount:'தொகை',mode:'முறை',date:'தேதி',note:'குறிப்பு',notePlaceholder:'முன்பணம்',savePayment:'கட்டணத்தைச் சேமி',
+  mode_cash:'ரொக்கம்',mode_upi:'UPI',mode_bank:'வங்கி',mode_cheque:'காசோலை',full:'முழு',
+  notesTerms:'குறிப்புகள் / நிபந்தனைகள்',edit:'திருத்து',deleteQuote:'விலைப்புள்ளியை நீக்கு',
+  saveAndSend:'சேமித்து அனுப்பு',save:'சேமி',pdf:'PDF',image:'படம்',print:'அச்சிடு',
+  siteRequired:'முதலில் தளத்தின் பெயரை உள்ளிடவும்.',needItems:'குறைந்தது ஒரு பொருளைச் சேர்க்கவும்.',
+  saved:'{q} சேமிக்கப்பட்டது',updated:'{q} புதுப்பிக்கப்பட்டது',paymentAdded:'கட்டணம் சேமிக்கப்பட்டது',paymentTooHigh:'தொகை நிலுவையை விட அதிகம்.',enterAmount:'சரியான தொகையை உள்ளிடவும்.',fullyPaid:'இந்த விலைப்புள்ளி முழுமையாகச் செலுத்தப்பட்டது.',
+  deleteConfirm:'{q} விலைப்புள்ளியை நீக்கவா?',deleted:'விலைப்புள்ளி நீக்கப்பட்டது',deletePaymentConfirm:'இந்தக் கட்டணத்தை நீக்கவா?',
+  discardConfirm:'சேமிக்காத மாற்றங்களைக் கைவிடவா?',
+  business:'வணிகம்',bizName:'வணிகப் பெயர்',bizTag:'துணைத் தலைப்பு',bizPhones:'தொலைபேசி வரிகள் (வரிக்கு ஒன்று)',defaultNotes:'இயல்பு குறிப்புகள் / நிபந்தனைகள்',defaultNotesHint:'காலியாக விட்டால் வழக்கமான 30 / 50 / 20 நிபந்தனைகள்.',
+  quoteDefaults:'விலைப்புள்ளி இயல்புகள்',gstPct:'ஜிஎஸ்டி %',discountPct:'தள்ளுபடி %',nextNumber:'அடுத்த விலைப்புள்ளி எண்',app:'App',language:'மொழி',clearAll:'எல்லா விலைப்புள்ளிகளையும் அழி',clearAllConfirm:'இந்த கைபேசியிலிருந்து எல்லா விலைப்புள்ளிகளையும் நீக்கவா? தேவைப்படலாம் என்றால் முதலில் காப்பு கோப்பைச் சேமிக்கவும்.',cleared:'எல்லா விலைப்புள்ளிகளும் அழிக்கப்பட்டன',
+  
+  
+  
+  
+  pdfPreparing:'PDF தயாராகிறது…',imagePreparing:'படம் தயாராகிறது…',sharePreparing:'பகிர PDF தயாராகிறது…',pdfSaved:'PDF சேமிக்கப்பட்டது',imageSaved:'படம் சேமிக்கப்பட்டது',shareFailed:'கோப்பைப் பகிர முடியவில்லை.',
+  saveOrShare:'சேமி அல்லது பகிர்',whatsappShare:'விலைப்புள்ளியைப் பகிர்',printViaShare:'அச்சிட printer அல்லது PDF app-ஐத் தேர்வு செய்யவும்',pdfDownloadedAttach:'PDF பதிவிறக்கப்பட்டது. WhatsApp-ல் இணைக்கவும்.',
+  quotationNumber:'விலைப்புள்ளி',siteShare:'தளம்',totalReceived:'பெற்றது',
+  a4Site:'தளத்தின் பெயர்',a4Place:'இடம்',a4Sno:'எண்',a4Type:'வகை',a4Size:'அளவு',a4TSize:'மொத்த அளவு (ச.அடி)',a4Price:'விலை/ச.அடி',a4Qty:'எண்ணிக்கை',a4TPrice:'மொத்த விலை (₹)',a4Total:'மொத்த தொகை',a4Notes:'குறிப்புகள் / நிபந்தனைகள்',a4Date:'தேதி',a4Valid:'செல்லுபடி தேதி',a4Thanks:'உங்கள் வணிகத்திற்கு நன்றி!',a4Sign:'அங்கீகரிக்கப்பட்ட கையொப்பம்',a4Received:'மொத்தம் பெற்றது',a4Balance:'மீதமுள்ள தொகை',
+  item:'பொருள்',newReady:'புதிய விலைப்புள்ளி',
+  pdfQuotation:'விலைப்புள்ளி',pdfFor:'வாடிக்கையாளர்',pdfNo:'விலைப்புள்ளி எண்',pdfDate:'தேதி',pdfValid:'செல்லுபடி தேதி',pdfDesc:'விவரம்',pdfSize:'அளவு',pdfSqft:'ச.அடி',pdfRate:'விலை ₹',pdfQty:'எண்',pdfAmount:'தொகை ₹',pdfFt:'அடி',pdfWords:'தொகை எழுத்தில்',pdfSchedule:'கட்டண அட்டவணை',pdfGrand:'மொத்த தொகை',pdfTerms:'நிபந்தனைகள் மற்றும் குறிப்புகள்',pdfDisclaimer:'இது விலைப்புள்ளி மட்டுமே, வரி விலைப்பட்டியல் அல்ல. மேலே உள்ள தேதி வரை விலைகள் செல்லுபடியாகும்.',pdfForBiz:'{b} சார்பாக',pdfThanks:'{b}-ஐத் தேர்ந்தெடுத்ததற்கு நன்றி',pdfPage:'பக்கம் {i} / {n}',
+  upiId:'UPI ID',upiIdHint:'இந்த UPI ID-க்கான QR code ஒவ்வொரு விலைப்புள்ளி PDF-லும் சேர்க்கப்படும்.',upiInvalid:'UPI ID சரியாக இல்லை. உதா: name@okaxis',upiName:'UPI app-களில் காட்டும் பெயர்',pdfScanPay:'ஸ்கேன் செய்து செலுத்தவும்',pdfUpiId:'UPI ID',pdfUpiApps:'GPay · PhonePe · Paytm · எந்த UPI app-உம்',
+  unit:'அலகு',unit_sqft:'ச.அடி',unit_rft:'ரன்னிங் அடி',unit_nos:'எண்ணிக்கை',unit_ls:'மொத்தமாக',u_sqft:'ச.அடி',u_rft:'ர.அடி',u_nos:'எண்',u_ls:'மொத்தமாக',lengthFt:'நீளம் (அடி)',ratePerRft:'ஒரு ரன்னிங் அடிக்கு ₹',ratePerNo:'ஒன்றுக்கு ₹',lumpAmount:'தொகை ₹',pdfMeasure:'மொத்தம்',
+  pdfDetails:'PDF விவரங்கள்',pdfDetailsSub:'விலைப்புள்ளி PDF-ல் வரும் பெயர் மற்றும் தொடர்புகள். சேமித்த பிறகு வரும் எல்லா PDF-லும் இவை வரும்.',contactsOnPdf:'PDF-ல் தொடர்புகள்',contactName:'பெயர்',addContact:'தொடர்பு சேர்',savePdfDetails:'PDF விவரங்களைச் சேமி',pdfDetailsSaved:'சேமிக்கப்பட்டது. இனி வரும் PDF-களில் இந்த விவரங்கள் வரும்.',bizNameRequired:'வணிகப் பெயரை உள்ளிடவும்.',contactInvalid:'ஒவ்வொரு தொடர்புக்கும் பெயர் மற்றும் 10 இலக்க எண் தேவை.',unsavedChanges:'மாற்றங்கள் இன்னும் சேமிக்கப்படவில்லை.',
+  
+  
+  
+  
+  
+  offlineTitle:'காப்பு கோப்பு',offlineSub:'எல்லா விலைப்புள்ளிகளும் அமைப்புகளும் ஒரே கோப்பாக சேமிக்கப்படும். WhatsApp, Drive app அல்லது கைபேசியில் வைத்துக்கொள்ளுங்கள். புதிய கைபேசியில் "கோப்பிலிருந்து மீட்டமை" அழுத்தி அதைத் தேர்ந்தெடுக்கவும். Google அமைப்பு தேவையில்லை.',
+  offlineSave:'காப்பு கோப்பைச் சேமி',offlineRestore:'கோப்பிலிருந்து மீட்டமை',offlineLast:'கடைசியாக சேமித்தது {t}',offlineNever:'இன்னும் காப்பு கோப்பு சேமிக்கவில்லை',offlineSaved:'காப்பு கோப்பு சேமிக்கப்பட்டது',
+  offlineBadFile:'இது Raya Wood Works காப்பு கோப்பு அல்ல.',offlineConfirm:'இந்தக் காப்பில் {n} விலைப்புள்ளிகள் உள்ளன ({d} சேமித்தது). இந்த கைபேசியில் சேர்க்கவா? இங்குள்ளவை அப்படியே இருக்கும்; ஒவ்வொன்றிலும் புதிய மாற்றம் வைக்கப்படும்.',offlineRestored:'காப்பு மீட்டெடுக்கப்பட்டது · {n} புதிய விலைப்புள்ளிகள்',
+  backup:'காப்பு',offlineRemind:'கடந்த 7 நாட்களில் காப்பு கோப்பு இல்லை. இப்போதே சேமித்து WhatsApp அல்லது Drive-ல் வைத்துக்கொள்ளுங்கள்.',offlineInfo:'விலைப்புள்ளிகள் இந்த கைபேசியில் மட்டுமே இருக்கும். கைபேசி தொலைந்தாலோ app நீக்கப்பட்டாலோ, காப்பு கோப்பிலிருந்து மட்டுமே திரும்பப் பெற முடியும்.',
+  appUpdates:'App புதுப்பிப்பு',versionLabel:'பதிப்பு',updateBadge:'புதியது',updateChecking:'புதுப்பிப்பைத் தேடுகிறது…',updateNone:'சமீபத்திய பதிப்பு ஏற்கனவே உள்ளது.',updateFailed:'புதுப்பிப்பைச் சரிபார்க்க முடியவில்லை. இணையத்தைச் சரிபார்த்து மீண்டும் முயலவும்.',updateOnlyApp:'Install செய்த Android app-ல் மட்டும் புதுப்பிப்பு வேலை செய்யும்.',
+  updateTitle:'புதிய பதிப்பு உள்ளது',updateVersion:'புதிய பதிப்பு {v}',updateSafe:'உங்கள் விலைப்புள்ளிகள் கைபேசியிலேயே இருக்கும். இந்த app மேல் புதுப்பிப்பு நிறுவப்படும்.',updateDownload:'புதுப்பிப்பைப் பதிவிறக்கு',updateLater:'பிறகு',updateAllow:'Raya Wood Works-க்கு "Install unknown apps" அனுமதி கொடுத்து, திரும்பி வந்து மீண்டும் பதிவிறக்கு அழுத்தவும்.',updateProgress:'பதிவிறக்குகிறது… {p}%',updateInstalling:'பதிவிறக்கம் முடிந்தது. அடுத்த திரையில் Install அழுத்தவும்.'
+}};
+const TYPE_DEFAULTS={en:['Wardrobe','Kitchen','Cot','Door','TV unit','Pooja unit'],ta:['அலமாரி','சமையலறை','கட்டில்','கதவு','TV யூனிட்','பூஜை அறை']};
+const PAY_MODES=['cash','upi','bank','cheque'];
+
+// ═══════════════ STATE ═══════════════
+const DEFAULT_SETTINGS={gst:false,gstVal:18,disc:false,discVal:0,quotNum:1,bizName:'SAKTHIVEL RAYA WOOD WORKS',bizTag:'WOOD WORKS & INTERIOR',bizPhones:'SAKTHIVEL: 78457 38353\nMUTHUBALAN: 93842 86406',defaultNotes:'',upiId:'',upiName:'',contacts:[{name:'SAKTHIVEL',phone:'78457 38353'},{name:'MUTHUBALAN',phone:'93842 86406'}]};
+const TOP=['home','quotes','customers','payments','reports','backup','settings'];
+let settings={...DEFAULT_SETTINGS};
+let quotes=[];
+let language=localStorage.getItem('srw_language')==='ta'?'ta':'en';
+let q=null,qBaseline='';            // quotation open in the editor
+let route='home',routeArg='',lastRoute='home',lastPath='home',editorDepth=0;
+let overlay=null;
+let quoteFilter='all',quoteSearch='',custSearch='',payTab='pending',pickSearch='';
+let itemDraft=null,itemIndex=-1,payDraft=null;
+let toastTimer=null;
+
+// ═══════════════ HELPERS ═══════════════
+function t(k){const v=TEXT[language]?.[k];return v!=null?v:(TEXT.en[k]!=null?TEXT.en[k]:k)}
+function tf(k,vars){return t(k).replace(/\{(\w+)\}/g,(_,n)=>vars[n]!=null?vars[n]:'')}
+function locale(){return language==='ta'?'ta-IN':'en-IN'}
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function fs(w,f){return (w||0)+(f===.25?'¼':f===.5?'½':f===.75?'¾':'')}
+function ct(w,wf,h,hf){return(w+(wf||0))*(h+(hf||0))}
+function fmt(n){return Math.round(+n||0).toLocaleString('en-IN')}
+function fmtShort(n){n=+n||0;if(n>=1e5)return '₹'+(n/1e5).toFixed(1).replace(/\.0$/,'')+'L';if(n>=1e3)return '₹'+Math.round(n/1e3)+'k';return '₹'+fmt(n)}
+function fmtTs(n){return parseFloat((+n||0).toFixed(2)).toString()}
+function localISODate(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function defaultValidTill(){const d=new Date();d.setDate(d.getDate()+30);return localISODate(d)}
+function monthKey(d){return d.getFullYear()+'-'+d.getMonth()}
+function fmtDate(d,opt){try{return d.toLocaleDateString(locale(),opt||{day:'numeric',month:'short'})}catch(e){return d.toDateString()}}
+function daysSince(d){return Math.max(0,Math.floor((Date.now()-d.getTime())/864e5))}
+function initials(name){const p=String(name||'').trim().split(/\s+/).filter(Boolean);return ((p[0]?Array.from(p[0])[0]:'')+(p[1]?Array.from(p[1])[0]:'')).toUpperCase()||'?'}
+function builtInNotes(){return language==='ta'?'• முன்பணம்: 30%\n• பாதி வேலை முடிந்ததும்: 50%\n• முழு வேலை முடிந்ததும்: மீதி 20%':'• Advance: 30%\n• After Half Work Complete: 50%\n• After Full Work Complete: Balance 20%'}
+function defaultNotes(){return String(settings.defaultNotes||'').trim()?settings.defaultNotes:builtInNotes()}
+function countLabel(n,one,many){return n===1?t(one):tf(many,{n})}
+
+// ═══════════════ DATA ═══════════════
+function loadData(){
+  try{quotes=JSON.parse(localStorage.getItem('srw_hist')||'[]');if(!Array.isArray(quotes))quotes=[]}catch(e){quotes=[]}
+  try{const s=JSON.parse(localStorage.getItem('srw_settings')||'null');if(s)settings={...DEFAULT_SETTINGS,...s}}catch(e){}
+  // Phones saved in the old order (Muthubalan first) switch to Sakthivel first, unless the user edited them.
+  if(String(settings.bizPhones||'').replace(/\r/g,'').trim()==='MUTHUBALAN: 93842 86406\nSAKTHIVEL: 78457 38353'){settings.bizPhones=DEFAULT_SETTINGS.bizPhones;saveSettings()}
+  // Older settings kept contacts as free text lines ("NAME: phone"); turn them into name + phone pairs once.
+  try{const raw=JSON.parse(localStorage.getItem('srw_settings')||'null');if(raw&&!Array.isArray(raw.contacts)){settings.contacts=String(settings.bizPhones||'').split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{const k=l.indexOf(':');return k>0?{name:l.slice(0,k).trim(),phone:l.slice(k+1).trim()}:{name:'',phone:l}});saveSettings()}}catch(e){}
+}
+function persistQuotes(){localStorage.setItem('srw_hist',JSON.stringify(quotes))}
+// Only write (and bump the sync timestamp) when the stored settings really change.
+function saveSettings(){
+  const data=JSON.stringify(settings);
+  if(data===localStorage.getItem('srw_settings'))return;
+  localStorage.setItem('srw_settings',data);localStorage.setItem('srw_settings_updated',new Date().toISOString());
+}
+function updateSetting(k,v){settings[k]=v;saveSettings()}
+function getDeleted(){try{return JSON.parse(localStorage.getItem('srw_deleted')||'{}')||{}}catch(e){return {}}}
+function setDeleted(map){localStorage.setItem('srw_deleted',JSON.stringify(map))}
+function markDeleted(ids){const map=getDeleted(),now=new Date().toISOString();ids.forEach(id=>{map[String(id)]=now});setDeleted(map)}
+
+// Item units: sqft (width × height), rft (running length), nos (per piece), ls (lumpsum). Old items have no unit = sqft.
+const UNITS=['sqft','rft','nos','ls'];
+function unitOf(it){return UNITS.includes(it.unit)?it.unit:'sqft'}
+function itemArea(it){const u=unitOf(it);if(u==='sqft')return ct(+it.w||0,+it.wf||0,+it.h||0,+it.hf||0);if(u==='rft')return (+it.w||0)+(+it.wf||0);return 1}
+function itemTotal(it){return itemArea(it)*(+it.price||0)*(unitOf(it)==='ls'?1:(+it.qty||1))}
+function itemSizeText(it){const u=unitOf(it);if(u==='sqft')return fs(+it.w||0,+it.wf||0)+' × '+fs(+it.h||0,+it.hf||0);if(u==='rft')return fs(+it.w||0,+it.wf||0);return ''}
+function itemMeasureText(it){const u=unitOf(it);return u==='sqft'||u==='rft'?fmtTs(itemArea(it))+' '+t('u_'+u):''}
+function calcTotals(items,tax){
+  const sub=(items||[]).reduce((s,it)=>s+itemTotal(it),0);
+  const disc=tax.disc?sub*(+tax.discVal||0)/100:0;
+  const gst=tax.gst?(sub-disc)*(+tax.gstVal||0)/100:0;
+  return {sub,disc,gst,total:sub-disc+gst};
+}
+function sumPayments(list){return (list||[]).reduce((s,p)=>s+(+p.amount||0),0)}
+function entryPayments(e){return Array.isArray(e.payments)?e.payments:(+e.paid?[{amount:+e.paid,date:e.updatedAt||new Date(+e.id||Date.now()).toISOString()}]:[])}
+function entryPaid(e){return sumPayments(entryPayments(e))}
+function entryBalance(e){return Math.max(0,(+e.total||0)-entryPaid(e))}
+function statusOf(e){if(e.draft)return 'draft';return entryBalance(e)<=0.5?'paid':'due'}
+function entryCreated(e){const n=Number(e.id);return isFinite(n)&&n>1e11?new Date(n):new Date()}
+function findQuote(id){return quotes.find(e=>String(e.id)===String(id))}
+function allPayments(){return quotes.flatMap(e=>entryPayments(e).map(p=>({...p,e})))}
+function quoteNumberOf(e){const m=/^Q(\d+)$/i.exec(String(e?.quotNo||''));return m?parseInt(m[1],10):0}
+function nextQuoteNo(){return 'Q'+String(settings.quotNum||1).padStart(3,'0')}
+function currentQuoteNo(){return q&&q.quotNo?q.quotNo:nextQuoteNo()}
+function ensureQuotNumAboveHistory(){
+  const top=quotes.reduce((mx,e)=>Math.max(mx,quoteNumberOf(e)),0);
+  if((settings.quotNum||1)<=top){settings.quotNum=top+1;saveSettings()}
+}
+function custKey(e){const d=String(e.phone||'').replace(/\D/g,'');return d?'p'+d.slice(-10):'n'+String(e.name||'').trim().toLowerCase()}
+function getCustomers(){
+  const map=new Map();
+  quotes.forEach(e=>{
+    const name=String(e.name||'').trim();if(!name)return;
+    const k=custKey(e);let c=map.get(k);
+    if(!c){c={key:k,name,place:e.place||'',phone:e.phone||'',quotes:[],business:0,due:0,last:0};map.set(k,c)}
+    c.quotes.push(e);if(!e.draft){c.business+=+e.total||0;c.due+=entryBalance(e)}
+    c.last=Math.max(c.last,+e.id||0);
+  });
+  return [...map.values()].sort((a,b)=>b.last-a.last);
+}
+function waNumber(phone){let d=String(phone||'').replace(/\D/g,'');if(d.length===10)d='91'+d;return d}
+
+// ── Quotation in the editor ──
+function newQuoteObj(pre){
+  return {id:null,quotNo:'',date:'',draft:true,name:pre?.name||'',place:pre?.place||'',phone:pre?.phone||'',validTill:defaultValidTill(),notes:defaultNotes(),items:[],payments:[],
+    tax:{gst:!!settings.gst,gstVal:+settings.gstVal||0,disc:!!settings.disc,discVal:+settings.discVal||0}};
+}
+function quoteFromEntry(e){
+  const s=e.settings||{};
+  return {id:e.id,quotNo:e.quotNo||'',date:e.date||'',draft:!!e.draft,name:e.name||'',place:e.place||'',phone:e.phone||'',validTill:e.validTill||'',notes:e.notes||'',
+    items:JSON.parse(JSON.stringify(e.items||[])),payments:JSON.parse(JSON.stringify(entryPayments(e))),
+    tax:{gst:s.gst!=null?!!s.gst:!!settings.gst,gstVal:s.gstVal!=null?+s.gstVal:+settings.gstVal,disc:s.disc!=null?!!s.disc:!!settings.disc,discVal:s.discVal!=null?+s.discVal:+settings.discVal}};
+}
+function snap(){return JSON.stringify(q)}
+function markClean(){qBaseline=q?snap():''}
+function isDirty(){return !!q&&snap()!==qBaseline}
+function qTotals(){return calcTotals(q.items,q.tax)}
+
+function saveQuote(draft,{silent=false}={}){
+  if(!q)return false;
+  if(!q.name.trim()){toast(t('siteRequired'));jumpStep(1);return false}
+  const isNew=!q.id;
+  if(isNew){q.id=Date.now();q.quotNo=nextQuoteNo();q.date=new Date().toLocaleDateString('en-IN');settings.quotNum=(settings.quotNum||1)+1;saveSettings()}
+  q.draft=!!draft;
+  const {total}=qTotals();
+  const entry={id:q.id,quotNo:q.quotNo,name:q.name.trim(),place:q.place,phone:q.phone,validTill:q.validTill,date:q.date,updatedAt:new Date().toISOString(),
+    items:JSON.parse(JSON.stringify(q.items)),payments:JSON.parse(JSON.stringify(q.payments)),notes:q.notes,settings:{...q.tax},total,paid:sumPayments(q.payments),draft:q.draft};
+  const idx=quotes.findIndex(e=>String(e.id)===String(q.id));
+  if(idx>=0)quotes[idx]=entry;else quotes.unshift(entry);
+  persistQuotes();markClean();
+  if(!silent)toast(tf(isNew?'saved':'updated',{q:q.quotNo}));
+  renderChrome();
+  return true;
+}
+
+// ═══════════════ ROUTER ═══════════════
+function parseHash(){const h=(location.hash||'').replace(/^#\/?/,'');const parts=h.split('/');return {r:parts[0]||'home',arg:decodeURIComponent(parts.slice(1).join('/'))}}
+function go(path,{replace=false}={}){
+  const cur=parseHash().r,dest=path.split('/')[0];
+  if(cur==='edit'&&dest!=='edit'&&isDirty()&&!confirm(t('discardConfirm')))return;
+  const rep=replace||(TOP.includes(dest)&&TOP.includes(cur)&&cur!=='home');
+  if(dest==='edit')editorDepth=cur==='edit'?(rep?editorDepth:editorDepth+1):1;
+  history[rep?'replaceState':'pushState'](null,'','#/'+path);
+  render();window.scrollTo(0,0);
+}
+function exitEditor(){const d=Math.max(1,editorDepth);history.go(-d)}
+window.addEventListener('popstate',()=>{
+  if(overlay){hideOverlay();return}
+  const {r}=parseHash();
+  if(lastRoute==='edit'&&r!=='edit'&&isDirty()&&!confirm(t('discardConfirm'))){history.pushState(null,'','#/'+lastPath);editorDepth=1;return}
+  editorDepth=r==='edit'?Math.max(1,editorDepth-1):0;
+  render();
+});
+// Android back button (called from MainActivity): true = handled here, false = let the app close.
+window.srwHandleBack=function(){
+  if(overlay){closeOverlay();return true}
+  if(parseHash().r!=='home'){history.back();return true}
+  return false;
+};
+
+// ═══════════════ OVERLAYS ═══════════════
+function showOverlay(kind){
+  if(overlay)hideOverlay();
+  overlay=kind;
+  document.getElementById('scrim').classList.add('show');
+  document.getElementById(kind==='drawer'?'drawer':'sheet').classList.add('show');
+  history.pushState({ov:1},'',location.href);
+}
+function hideOverlay(){
+  if(!overlay)return;
+  overlay=null;
+  ['scrim','drawer','sheet'].forEach(id=>document.getElementById(id).classList.remove('show'));
+  document.body.classList.remove('kb');
+}
+function closeOverlay(){if(overlay)history.back()}
+function openSheet(html){document.getElementById('sheet').innerHTML='<div class="sheet-in"><div class="grab"></div>'+html+'</div>';document.getElementById('sheet').scrollTop=0;showOverlay('sheet')}
+function openDrawer(){renderDrawer();showOverlay('drawer')}
+function navFromDrawer(path){
+  hideOverlay();
+  history.replaceState(null,'','#/'+path); // replaces the drawer's history entry
+  render();window.scrollTo(0,0);
+}
+function renderDrawer(){
+  const items=[['home','ti-home','home'],['quotes','ti-file-text','quotations'],['customers','ti-users','customers'],['payments','ti-cash','payments'],['reports','ti-chart-bar','reports']];
+  const items2=[['backup','ti-device-floppy','backup'],['settings','ti-settings','settings']];
+  const link=([r,ic,l])=>`<button class="dl ${route===r?'on':''}" onclick="navFromDrawer('${r}')"><i class="ti ${ic}"></i>${esc(t(l))}</button>`;
+  document.getElementById('drawer').innerHTML=`
+    <div class="drawer-head walnut"><img src="assets/raya-emblem.png" alt=""><div class="b" style="font-size:19px">Raya Wood Works</div><div style="font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#e8d3b0;margin-top:3px">${esc(settings.bizTag||t('bizSub'))}</div></div>
+    <div style="padding-top:8px">${items.map(link).join('')}
+    <div style="border-top:1px solid var(--line);margin:6px 0"></div>${items2.map(link).join('')}
+    <button class="dl" onclick="setLanguage(language==='ta'?'en':'ta')"><i class="ti ti-language"></i>${language==='ta'?'English':'தமிழ்'}</button></div>
+    <div class="drawer-foot"><i class="ti ti-device-floppy"></i> ${esc(offlineLastText())}</div>`;
+}
+
+// ═══════════════ RENDER ═══════════════
+function render(){
+  const {r,arg}=parseHash();
+  if(r!=='settings')bizDraft=null;
+  route=r;routeArg=arg;lastRoute=r;lastPath=(location.hash||'#/home').replace(/^#\/?/,'')||'home';
+  if(r==='edit'&&!q){q=newQuoteObj();markClean()}
+  const pages={home:pageHome,quotes:pageQuotes,customers:pageCustomers,customer:pageCustomer,payments:pagePayments,reports:pageReports,backup:pageBackup,settings:pageSettings,edit:pageEditor};
+  const page=(pages[r]||pageHome)(arg);
+  document.getElementById('topbar').innerHTML=page.top;
+  const stepper=document.getElementById('stepper');stepper.style.display=page.stepper?'flex':'none';stepper.innerHTML=page.stepper||'';
+  document.getElementById('view').innerHTML=page.body;
+  const foot=document.getElementById('footbar');foot.style.display=page.foot?'block':'none';document.getElementById('footbar-in').innerHTML=page.foot||'';
+  document.body.classList.toggle('editor',r==='edit');
+  renderBottomNav(r);
+  if(page.after)page.after();
+}
+// Refresh only the chrome (title, stepper, footer) without touching inputs the user is typing in.
+function renderChrome(){if(route!=='edit')return;const page=pageEditor(routeArg);document.getElementById('topbar').innerHTML=page.top;document.getElementById('stepper').innerHTML=page.stepper||'';document.getElementById('footbar-in').innerHTML=page.foot||''}
+function renderBottomNav(r){
+  const nav=document.getElementById('bnav');
+  if(r==='edit'){nav.style.display='none';return}
+  nav.style.display='block';
+  const active=r==='customer'?'customers':r;
+  const btn=(id,ic,l)=>`<button class="${active===id?'on':''}" onclick="go('${id}')"><i class="ti ${ic}"></i><span>${esc(t(l))}</span></button>`;
+  document.getElementById('bnav-in').innerHTML=btn('home','ti-home','navHome')+btn('quotes','ti-file-text','navQuotes')+
+    `<button class="fab" onclick="newQuote()" aria-label="${esc(t('newQuotation'))}"><i class="ti ti-plus"></i></button>`+
+    btn('customers','ti-users','navCustomers')+btn('payments','ti-cash','navPayments');
+}
+function topMenu(title,right=''){return `<button class="icon-btn" onclick="openDrawer()" aria-label="${esc(t('menu'))}"><i class="ti ti-menu-2"></i></button><div class="title">${esc(title)}</div>${right}`}
+function topBrand(right){return `<button class="icon-btn" onclick="openDrawer()" aria-label="${esc(t('menu'))}"><i class="ti ti-menu-2"></i></button><div class="brand"><img src="assets/raya-emblem.png" alt=""><div style="min-width:0"><div class="name">Raya Wood Works</div><div class="sub">${esc(settings.bizTag||t('bizSub'))}</div></div></div>${right}`}
+function topBack(title,right='',action='history.back()',icon='ti-arrow-left'){return `<button class="icon-btn" onclick="${action}" aria-label="${esc(t('back'))}"><i class="ti ${icon}"></i></button><div class="title">${esc(title)}</div>${right}`}
+function statusPill(e,showAmount){
+  const st=statusOf(e);
+  if(st==='due')return `<span class="pill due">${showAmount?'₹'+fmt(entryBalance(e))+' '+esc(t('dueSuffix')):esc(t('due'))}</span>`;
+  return `<span class="pill ${st}">${esc(t(st))}</span>`;
+}
+function quoteCard(e,showAmount){
+  return `<button class="card" data-id="${esc(e.id)}" onclick="openQuote(this.dataset.id)">
+    <div class="row"><span class="b ell">${esc(e.name||'-')}</span><span class="b">₹${fmt(e.total)}</span></div>
+    <div class="row mt4"><span class="m ell">${esc(e.quotNo||'')} · ${esc(e.place||fmtDate(entryCreated(e)))}</span>${statusPill(e,showAmount)}</div></button>`;
+}
+function emptyState(icon,title,sub,action){return `<div class="empty"><i class="ti ${icon}"></i><div class="b" style="color:var(--text);margin-bottom:4px">${esc(title)}</div>${sub?`<div>${esc(sub)}</div>`:''}${action||''}</div>`}
+
+// ── HOME ──
+function pageHome(){
+  const now=new Date(),mk=monthKey(now),real=quotes.filter(e=>!e.draft);
+  const quoted=real.filter(e=>monthKey(entryCreated(e))===mk).reduce((s,e)=>s+(+e.total||0),0);
+  const toCollect=real.reduce((s,e)=>s+entryBalance(e),0);
+  const count=quotes.filter(e=>monthKey(entryCreated(e))===mk).length;
+  const received=allPayments().filter(p=>{const d=new Date(p.date);return !isNaN(d)&&monthKey(d)===mk}).reduce((s,p)=>s+(+p.amount||0),0);
+  const recent=[...quotes].sort((a,b)=>String(b.updatedAt||'').localeCompare(String(a.updatedAt||''))||(+b.id-+a.id)).slice(0,5);
+  const stat=(l,v,c)=>`<div class="stat"><div class="m">${esc(t(l))}</div><div class="v" style="${c?'color:'+c:''}">${v}</div></div>`;
+  return {
+    top:topBrand(`<button class="icon-btn" onclick="go('quotes');setTimeout(()=>document.getElementById('q-search')?.focus(),60)" aria-label="${esc(t('search'))}"><i class="ti ti-search"></i></button>`),
+    body:`<div class="stats">${stat('quotedMonth','₹'+fmt(quoted))}${stat('toCollect','₹'+fmt(toCollect),'var(--due)')}${stat('quotesMonth',count)}${stat('receivedMonth','₹'+fmt(received),'var(--paid)')}</div>
+      <div class="sec-h"><span>${esc(t('recent'))}</span>${quotes.length?`<button onclick="go('quotes')">${esc(t('seeAll'))}</button>`:''}</div>
+      ${recent.length?recent.map(e=>quoteCard(e,true)).join(''):emptyState('ti-file-plus',t('startFirst'),t('startFirstSub'),`<button class="btn btn-gold mt12" onclick="newQuote()"><i class="ti ti-plus"></i>${esc(t('newQuotation'))}</button>`)}`
+  };
+}
+function toTitle(s){return String(s).toLowerCase().replace(/(^|\s)\S/g,c=>c.toUpperCase())}
+
+// ── QUOTES ──
+function pageQuotes(){
+  const counts={all:quotes.length,due:0,paid:0,draft:0};quotes.forEach(e=>counts[statusOf(e)]++);
+  const chip=(k,l)=>`<button class="chip ${quoteFilter===k?'on':''}" onclick="quoteFilter='${k}';render()">${esc(t(l))} ${counts[k]}</button>`;
+  return {
+    top:topMenu(t('quotations')),
+    body:`<div class="search"><i class="ti ti-search"></i><input id="q-search" type="search" value="${esc(quoteSearch)}" placeholder="${esc(t('searchQuotes'))}" oninput="quoteSearch=this.value;renderQuoteList()"></div>
+      <div class="chips">${chip('all','all')}${chip('due','due')}${chip('paid','paid')}${chip('draft','draft')}</div><div id="qlist"></div>`,
+    after:renderQuoteList
+  };
+}
+function renderQuoteList(){
+  const el=document.getElementById('qlist');if(!el)return;
+  const s=quoteSearch.trim().toLowerCase();
+  const list=quotes.filter(e=>(quoteFilter==='all'||statusOf(e)===quoteFilter)&&(!s||[e.name,e.place,e.phone,e.quotNo].join(' ').toLowerCase().includes(s)))
+    .sort((a,b)=>+b.id-+a.id);
+  if(!list.length){el.innerHTML=quotes.length?emptyState('ti-search',t('noMatch')):emptyState('ti-file-plus',t('startFirst'),t('startFirstSub'));return}
+  let html='',lastM='';
+  list.forEach(e=>{const d=entryCreated(e),m=monthKey(d);if(m!==lastM){lastM=m;html+=`<div class="m" style="margin:10px 4px 6px">${esc(fmtDate(d,{month:'long',year:'numeric'}))}</div>`}html+=quoteCard(e,false)});
+  el.innerHTML=html;
+}
+
+// ── CUSTOMERS ──
+function pageCustomers(){
+  return {
+    top:topMenu(t('customers'),`<button class="icon-btn" onclick="newQuote()" aria-label="${esc(t('newQuotation'))}"><i class="ti ti-user-plus"></i></button>`),
+    body:`<div class="search"><i class="ti ti-search"></i><input type="search" value="${esc(custSearch)}" placeholder="${esc(t('searchCustomers'))}" oninput="custSearch=this.value;renderCustomerList()"></div><div id="clist"></div>`,
+    after:renderCustomerList
+  };
+}
+function renderCustomerList(){
+  const el=document.getElementById('clist');if(!el)return;
+  const s=custSearch.trim().toLowerCase(),all=getCustomers();
+  const list=all.filter(c=>!s||[c.name,c.place,c.phone].join(' ').toLowerCase().includes(s));
+  if(!list.length){el.innerHTML=all.length?emptyState('ti-search',t('noMatch')):emptyState('ti-users',t('customers'),t('noCustomers'));return}
+  el.innerHTML=list.map(c=>`<button class="card row" style="justify-content:flex-start;gap:12px" data-k="${esc(c.key)}" onclick="go('customer/'+encodeURIComponent(this.dataset.k))">
+    <div class="av">${esc(initials(c.name))}</div>
+    <div style="flex:1;min-width:0"><div class="b ell">${esc(c.name)}</div><div class="m ell">${esc([c.place,c.phone||countLabel(c.quotes.length,'oneQuote','nQuotes')].filter(Boolean).join(' · '))}</div></div>
+    ${c.due>0.5?`<span class="pill due">${fmtShort(c.due)}</span>`:c.business>0?`<span class="pill paid">${esc(t('paid'))}</span>`:'<i class="ti ti-chevron-right" style="color:var(--muted)"></i>'}</button>`).join('');
+}
+function pageCustomer(key){
+  const c=getCustomers().find(x=>x.key===key);
+  if(!c)return {top:topBack(t('customers')),body:emptyState('ti-user-off',t('noMatch'))};
+  const phone=String(c.phone||'').trim(),wa=waNumber(phone);
+  const action=(href,ic,l,color,onclick)=>`<${href?`a href="${esc(href)}"`:`button onclick="${onclick}"`} class="card" style="margin:0;text-align:center;color:${color}"><i class="ti ${ic}" style="font-size:22px"></i><div style="font-size:12.5px;margin-top:2px">${esc(t(l))}</div></${href?'a':'button'}>`;
+  return {
+    top:topBack(c.name),
+    body:`<div style="text-align:center;padding:8px 0 14px"><div class="av" style="width:64px;height:64px;font-size:20px;margin:0 auto 8px">${esc(initials(c.name))}</div><div class="b" style="font-size:17px">${esc(c.name)}</div><div class="m">${esc([c.place,phone].filter(Boolean).join(' · '))}</div></div>
+      <div style="display:grid;grid-template-columns:repeat(${phone?3:1},1fr);gap:8px;margin-bottom:10px">
+        ${phone?action('tel:'+phone.replace(/[^\d+]/g,''),'ti-phone','call','var(--blue)'):''}
+        ${phone&&wa?action('https://wa.me/'+wa,'ti-brand-whatsapp','whatsapp','#1a7f45'):''}
+        ${action('','ti-file-plus','newQuote','var(--due)',`newQuoteForCustomer(${JSON.stringify(c.key).replace(/"/g,'&quot;')})`)}
+      </div>
+      <div class="card"><div class="row"><span class="m">${esc(t('totalBusiness'))}</span><span class="b">₹${fmt(c.business)}</span></div><div class="row mt4"><span class="m">${esc(t('balanceDue'))}</span><span class="b" style="color:var(--due)">₹${fmt(c.due)}</span></div></div>
+      <div class="sec-h"><span>${esc(t('quotations'))}</span></div>${c.quotes.map(e=>quoteCard(e,true)).join('')}`
+  };
+}
+function newQuoteForCustomer(key){const c=getCustomers().find(x=>x.key===key);newQuote(c?{name:c.name,place:c.place,phone:c.phone}:null)}
+
+// ── PAYMENTS ──
+function pagePayments(){
+  const real=quotes.filter(e=>!e.draft);
+  const pending=real.filter(e=>entryBalance(e)>0.5).sort((a,b)=>entryBalance(b)-entryBalance(a));
+  const toCollect=pending.reduce((s,e)=>s+entryBalance(e),0);
+  const business=real.reduce((s,e)=>s+(+e.total||0),0),got=real.reduce((s,e)=>s+entryPaid(e),0);
+  const pct=business>0?Math.min(100,Math.round(got/business*100)):0;
+  let list='';
+  if(payTab==='pending'){
+    list=pending.length?pending.map(e=>{
+      const pays=entryPayments(e),lastPay=pays.length?new Date(pays[pays.length-1].date):entryCreated(e);
+      const days=daysSince(isNaN(lastPay)?entryCreated(e):lastPay);
+      return `<button class="card" data-id="${esc(e.id)}" onclick="openQuote(this.dataset.id)"><div class="row"><span class="b ell">${esc(e.name)}</span><span class="b" style="color:var(--due)">₹${fmt(entryBalance(e))}</span></div>
+        <div class="row mt4"><span class="m ell">${esc(e.quotNo||'')} · ${esc(tf('daysPending',{n:days}))}</span>${days>15?`<span class="pill late">${esc(t('late'))}</span>`:''}</div></button>`}).join(''):emptyState('ti-circle-check',t('noPending'));
+  }else{
+    const pays=allPayments().filter(p=>!isNaN(new Date(p.date))).sort((a,b)=>new Date(b.date)-new Date(a.date));
+    list=pays.length?pays.map(p=>`<button class="card" data-id="${esc(p.e.id)}" onclick="openQuote(this.dataset.id)"><div class="row"><span class="b ell">${esc(p.e.name)}</span><span class="b" style="color:var(--paid)">+₹${fmt(p.amount)}</span></div>
+      <div class="m mt4 ell">${esc(p.e.quotNo||'')} · ${esc(fmtDate(new Date(p.date),{day:'numeric',month:'short',year:'numeric'}))}${p.mode?' · '+esc(t('mode_'+p.mode)):''}${p.note?' · '+esc(p.note):''}</div></button>`).join(''):emptyState('ti-cash-off',t('noReceived'));
+  }
+  return {
+    top:topMenu(t('payments')),
+    body:`<div class="card"><div class="m">${esc(tf('toCollectFrom',{n:pending.length}))}</div><div class="b" style="font-size:22px;color:var(--due);margin:2px 0 8px">₹${fmt(toCollect)}</div>
+      <div class="progress"><div style="width:${pct}%"></div></div><div class="m mt4">${esc(tf('collectedPct',{p:pct}))}</div></div>
+      <div class="chips mt8"><button class="chip ${payTab==='pending'?'on':''}" onclick="payTab='pending';render()">${esc(t('pending'))}</button><button class="chip ${payTab==='received'?'on':''}" onclick="payTab='received';render()">${esc(t('received'))}</button></div>${list}`
+  };
+}
+
+// ── REPORTS ──
+function pageReports(){
+  const now=new Date(),real=quotes.filter(e=>!e.draft);
+  const months=[];for(let i=5;i>=0;i--){const d=new Date(now.getFullYear(),now.getMonth()-i,1);months.push({k:monthKey(d),label:fmtDate(d,{month:'short'}),quoted:0,received:0})}
+  real.forEach(e=>{const m=months.find(x=>x.k===monthKey(entryCreated(e)));if(m)m.quoted+=+e.total||0});
+  allPayments().forEach(p=>{const d=new Date(p.date);if(isNaN(d))return;const m=months.find(x=>x.k===monthKey(d));if(m)m.received+=+p.amount||0});
+  const max=Math.max(1,...months.flatMap(m=>[m.quoted,m.received]));
+  const by={due:[0,0],paid:[0,0],draft:[0,0]};quotes.forEach(e=>{const s=statusOf(e);by[s][0]++;by[s][1]+=+e.total||0});
+  const top=getCustomers().filter(c=>c.business>0).sort((a,b)=>b.business-a.business).slice(0,5);
+  const avg=real.length?real.reduce((s,e)=>s+(+e.total||0),0)/real.length:0;
+  return {
+    top:topMenu(t('reports')),
+    body:!quotes.length?emptyState('ti-chart-bar',t('nothingYet')):`
+      <div class="card"><div class="b">${esc(t('last6'))}</div>
+        <div class="bars">${months.map(m=>`<div class="bar-col"><div class="bar-pair"><div class="bar q" style="height:${m.quoted/max*100}%" title="₹${fmt(m.quoted)}"></div><div class="bar r" style="height:${m.received/max*100}%" title="₹${fmt(m.received)}"></div></div><div class="m">${esc(m.label)}</div></div>`).join('')}</div>
+        <div class="legend"><span style="--c:var(--blue)">${esc(t('quotedLbl'))}</span><span style="--c:var(--ok)">${esc(t('receivedLbl'))}</span></div></div>
+      <div class="card"><div class="b" style="margin-bottom:4px">${esc(t('byStatus'))}</div>
+        ${['due','paid','draft'].map(s=>`<div class="srow"><span><span class="pill ${s}">${esc(t(s))}</span> <span class="m">× ${by[s][0]}</span></span><span class="b">₹${fmt(by[s][1])}</span></div>`).join('')}
+        <div class="srow"><span class="m">${esc(t('avgQuote'))}</span><span class="b">₹${fmt(avg)}</span></div></div>
+      ${top.length?`<div class="card"><div class="b" style="margin-bottom:4px">${esc(t('topCustomers'))}</div>${top.map((c,i)=>`<div class="srow"><span class="ell">${i+1}. ${esc(c.name)}</span><span class="b">₹${fmt(c.business)}</span></div>`).join('')}</div>`:''}`
+  };
+}
+
+// ── BACKUP ──
+function pageBackup(){
+  const offlineLast=localStorage.getItem('srw_offline_last');
+  const stale=!offlineLast||daysSince(new Date(offlineLast))>=7;
+  return {
+    top:topMenu(t('backup')),
+    body:`<div class="card">
+        <div class="row" style="justify-content:flex-start;gap:12px"><i class="ti ti-device-floppy" style="font-size:32px;color:var(--blue)"></i><div><div class="b">${esc(t('offlineTitle'))}</div><div class="m" style="${stale&&quotes.length?'color:var(--due)':''}">${esc(offlineLastText())}</div></div></div>
+        <div class="m mt8" style="line-height:1.55">${esc(t('offlineSub'))}</div>
+        <div class="g2 mt12"><button class="btn btn-primary" onclick="exportBackupFile()"><i class="ti ti-file-export"></i>${esc(t('offlineSave'))}</button><button class="btn btn-line" onclick="pickBackupFile()"><i class="ti ti-file-import"></i>${esc(t('offlineRestore'))}</button></div>
+        <input type="file" id="backup-file" style="display:none" onchange="importBackupFile(this)">
+      </div>
+      ${stale&&quotes.length?`<div class="card" style="background:var(--due-bg);border-color:#efd9a8;color:var(--due)"><i class="ti ti-alert-triangle"></i> ${esc(t('offlineRemind'))}</div>`:''}
+      <p class="m" style="margin-top:8px;line-height:1.6">${esc(t('offlineInfo'))}</p>`
+  };
+}
+
+// ── SETTINGS ──
+function pageSettings(){
+  getAppVersion().then(v=>{const el=document.getElementById('app-version');if(el)el.textContent=v?t('versionLabel')+' '+v.versionName+' ('+v.versionCode+')':t('updateOnlyApp')});
+  const f=bizForm();
+  const tog=(k)=>`<button class="toggle ${settings[k]?'on':''}" onclick="updateSetting('${k}',!settings.${k});render()" aria-label="${esc(k)}"></button>`;
+  return {
+    top:topMenu(t('settings')),
+    body:`<div class="sec">${esc(t('pdfDetails'))}</div>
+      <div class="card">
+        <div class="m" style="margin-bottom:12px">${esc(t('pdfDetailsSub'))}</div>
+        <div class="field"><label>${esc(t('bizName'))}</label><input class="inp" id="bf-name" value="${esc(f.bizName)}" oninput="bizEdited()"></div>
+        <div class="field"><label>${esc(t('bizTag'))}</label><input class="inp" id="bf-tag" value="${esc(f.bizTag)}" oninput="bizEdited()"></div>
+        <label class="lbl">${esc(t('contactsOnPdf'))}</label>
+        ${f.contacts.map((c,i)=>`<div class="bf-contact" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 36px;gap:8px;margin-bottom:8px;align-items:center">
+          <input class="inp bf-cn" value="${esc(c.name||'')}" placeholder="${esc(t('contactName'))}" oninput="bizEdited()">
+          <input class="inp bf-cp" type="tel" inputmode="tel" value="${esc(c.phone||'')}" placeholder="98765 43210" oninput="bizEdited()">
+          <button class="icon-btn" style="width:36px;height:36px;font-size:18px;color:var(--red)" onclick="removeContactRow(${i})" aria-label="${esc(t('deleteItem'))}"><i class="ti ti-x"></i></button></div>`).join('')}
+        ${f.contacts.length<3?`<button class="link" style="margin:0 0 14px" onclick="addContactRow()">+ ${esc(t('addContact'))}</button>`:''}
+        <div class="field"><label>${esc(t('upiId'))}</label><input class="inp" id="bf-upi" value="${esc(f.upiId)}" placeholder="name@okaxis" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email" oninput="bizEdited()"><div class="m mt4">${esc(t('upiIdHint'))}</div></div>
+        <div class="field"><label>${esc(t('upiName'))}</label><input class="inp" id="bf-upiname" value="${esc(f.upiName)}" placeholder="${esc(f.bizName)}" oninput="bizEdited()"></div>
+        <div class="field"><label>${esc(t('defaultNotes'))}</label><textarea class="inp" id="bf-notes" placeholder="${esc(builtInNotes())}" oninput="bizEdited()">${esc(f.defaultNotes)}</textarea><div class="m mt4">${esc(t('defaultNotesHint'))}</div></div>
+        <div class="err" id="bf-err">${bizDraft?esc(t('unsavedChanges')):''}</div>
+        <button class="btn btn-primary" onclick="saveBizForm()"><i class="ti ti-device-floppy"></i>${esc(t('savePdfDetails'))}</button>
+      </div>
+      <div class="sec">${esc(t('quoteDefaults'))}</div>
+      <div class="card" style="padding-top:2px;padding-bottom:2px">
+        <div class="srow"><span>${esc(t('gstPct'))}</span><span class="row"><input class="inp pct" type="number" inputmode="decimal" value="${esc(settings.gstVal)}" onchange="updateSetting('gstVal',parseFloat(this.value)||0)">${tog('gst')}</span></div>
+        <div class="srow"><span>${esc(t('discountPct'))}</span><span class="row"><input class="inp pct" type="number" inputmode="decimal" value="${esc(settings.discVal)}" onchange="updateSetting('discVal',parseFloat(this.value)||0)">${tog('disc')}</span></div>
+        <div class="srow"><span>${esc(t('nextNumber'))}</span><span class="row"><span class="m">Q</span><input class="inp pct" type="number" inputmode="numeric" min="1" value="${esc(settings.quotNum)}" onchange="updateSetting('quotNum',Math.max(1,parseInt(this.value)||1));render()"></span></div>
+      </div>
+      <div class="sec">${esc(t('app'))}</div>
+      <div class="card" style="padding-top:2px;padding-bottom:2px">
+        <div class="srow"><span>${esc(t('language'))}</span><div class="seg" style="width:170px"><button class="${language==='ta'?'on':''}" onclick="setLanguage('ta')">தமிழ்</button><button class="${language==='en'?'on':''}" onclick="setLanguage('en')">English</button></div></div>
+        <button class="srow" onclick="go('backup')"><span style="text-align:left">${esc(t('backup'))}<div class="m">${esc(offlineLastText())}</div></span><i class="ti ti-chevron-right" style="color:var(--muted)"></i></button>
+        <button class="srow" onclick="checkForUpdate(true)"><span style="text-align:left">${esc(t('appUpdates'))}<div class="m" id="app-version">${esc(t('versionLabel'))} …</div></span>${pendingUpdate?`<span class="pill due">${esc(t('updateBadge'))}</span>`:'<i class="ti ti-refresh" style="color:var(--muted)"></i>'}</button>
+        <button class="srow" style="color:var(--red)" onclick="clearAllQuotes()"><span>${esc(t('clearAll'))}</span><i class="ti ti-trash"></i></button>
+      </div>`
+  };
+}
+// ── PDF details form: edits stay in a draft until "Save PDF details" ──
+let bizDraft=null;
+function bizForm(){return bizDraft||{bizName:settings.bizName||'',bizTag:settings.bizTag||'',contacts:(settings.contacts||[]).map(c=>({name:c.name||'',phone:c.phone||''})),upiId:settings.upiId||'',upiName:settings.upiName||'',defaultNotes:settings.defaultNotes||''}}
+function readBizForm(){
+  const v=id=>document.getElementById(id)?.value??'';
+  bizDraft={bizName:v('bf-name'),bizTag:v('bf-tag'),upiId:v('bf-upi'),upiName:v('bf-upiname'),defaultNotes:v('bf-notes'),
+    contacts:[...document.querySelectorAll('.bf-contact')].map(r=>({name:r.querySelector('.bf-cn').value,phone:r.querySelector('.bf-cp').value}))};
+  return bizDraft;
+}
+function bizEdited(){readBizForm();const e=document.getElementById('bf-err');if(e)e.textContent=t('unsavedChanges')}
+function addContactRow(){const d=readBizForm();if(d.contacts.length<3)d.contacts.push({name:'',phone:''});render()}
+function removeContactRow(i){const d=readBizForm();d.contacts.splice(i,1);render()}
+function saveBizForm(){
+  const d=readBizForm(),err=document.getElementById('bf-err');
+  const name=d.bizName.trim();
+  if(!name){err.textContent=t('bizNameRequired');return}
+  const contacts=d.contacts.map(c=>({name:c.name.trim(),phone:c.phone.trim()})).filter(c=>c.name||c.phone);
+  if(contacts.some(c=>!c.name||c.phone.replace(/\D/g,'').length<10)){err.textContent=t('contactInvalid');return}
+  const upi=d.upiId.trim();
+  if(upi&&!isValidUpi(upi)){err.textContent=t('upiInvalid');return}
+  Object.assign(settings,{bizName:name,bizTag:d.bizTag.trim(),contacts,upiId:upi,upiName:d.upiName.trim(),defaultNotes:d.defaultNotes});
+  saveSettings();bizDraft=null;render();toast(t('pdfDetailsSaved'));
+}
+function setLanguage(v){if(route==='settings'&&document.getElementById('bf-name'))readBizForm();language=v==='ta'?'ta':'en';localStorage.setItem('srw_language',language);document.documentElement.lang=language;render();if(overlay==='drawer')renderDrawer()}
+function clearAllQuotes(){
+  if(!quotes.length||!confirm(t('clearAllConfirm')))return;
+  markDeleted(quotes.map(e=>e.id));quotes=[];persistQuotes();q=null;render();toast(t('cleared'));
+}
+
+// ═══════════════ EDITOR ═══════════════
+function newQuote(pre){q=newQuoteObj(pre);markClean();go('edit/1')}
+function openQuote(id){const e=findQuote(id);if(!e)return;q=quoteFromEntry(e);markClean();go('edit/3')}
+function canReach(step){
+  if(step>=2&&!q.name.trim()){toast(t('siteRequired'));return false}
+  if(step>=3&&!q.items.length){toast(t('needItems'));return false}
+  return true;
+}
+function nextStep(n){if(canReach(n))go('edit/'+n)}
+function jumpStep(n){if(n>1&&!canReach(n))return;if(+routeArg===n)return;history.replaceState(null,'','#/edit/'+n);render();window.scrollTo(0,0)}
+function stepperHtml(n){
+  const labels=[t('stepCustomer'),t('stepItems'),t('stepReview')];
+  return labels.map((l,i)=>{const k=i+1;return (i?`<span class="ln ${k<=n?'ok':''}"></span>`:'')+`<button class="${k===n?'on':''}" onclick="jumpStep(${k})">${k<n?'✓':k} ${esc(l)}</button>`}).join('');
+}
+function pageEditor(arg){
+  const step=Math.min(3,Math.max(1,parseInt(arg)||1));
+  const no=currentQuoteNo(),statusTag=q.id?(q.draft?t('draft'):''):t('draft');
+  const saveBtn=`<button class="icon-btn" onclick="saveQuote(q.id?q.draft:true)" aria-label="${esc(t('save'))}"><i class="ti ti-device-floppy"></i></button>`;
+  const title=q.name.trim()?no+' · '+q.name.trim():(q.id?no:t('newQuotation')+' · '+no);
+  const top=step===1
+    ?topBack(title,statusTag?`<span class="tag">${esc(statusTag)}</span>`:'','exitEditor()',editorDepth<=1?'ti-x':'ti-arrow-left')
+    :topBack(title,saveBtn,editorDepth<=1?'exitEditor()':'history.back()');
+  const {total}=qTotals();
+  if(step===1)return {top,stepper:stepperHtml(1),body:editorStep1(),foot:`<button class="btn btn-primary" onclick="nextStep(2)">${esc(t('nextItems'))} <i class="ti ti-arrow-right"></i></button>`};
+  if(step===2)return {top,stepper:stepperHtml(2),body:editorStep2(),
+    foot:`<div class="row"><div><div class="m">${esc(countLabel(q.items.length,'oneItem','nItems'))}</div><div class="b" style="font-size:19px;color:var(--blue)">₹${fmt(total)}</div></div><button class="btn btn-primary" style="width:auto;padding:12px 26px" onclick="nextStep(3)">${esc(t('next'))} <i class="ti ti-arrow-right"></i></button></div>`};
+  return {top,stepper:stepperHtml(3),body:editorStep3(),after:()=>{updateReviewTotals();renderThumb()},
+    foot:`<button class="btn btn-wa" onclick="saveAndSend()"><i class="ti ti-brand-whatsapp"></i>${esc(t('saveAndSend'))}</button>
+      <div class="mini-actions"><button onclick="saveQuote(false)"><i class="ti ti-device-floppy"></i>${esc(t('save'))}</button><button onclick="generatePDF()"><i class="ti ti-file-type-pdf"></i>${esc(t('pdf'))}</button><button onclick="generateImage()"><i class="ti ti-photo"></i>${esc(t('image'))}</button><button onclick="doPrint()"><i class="ti ti-printer"></i>${esc(t('print'))}</button></div>
+      <div class="status-line" id="status"></div>`};
+}
+function editorStep1(){
+  const hasCustomers=quotes.some(e=>String(e.name||'').trim());
+  return `${hasCustomers?`<button class="btn btn-soft" style="margin-bottom:14px" onclick="openCustomerPicker()"><i class="ti ti-users"></i>${esc(t('pickCustomer'))}</button>`:''}
+    <div class="card">
+      <div class="field"><label>${esc(t('siteName'))}</label><input class="inp" id="f-name" value="${esc(q.name)}" placeholder="${esc(t('sitePlaceholder'))}" oninput="q.name=this.value;renderChrome()"></div>
+      <div class="field"><label>${esc(t('place'))}</label><input class="inp" value="${esc(q.place)}" placeholder="${esc(t('placePlaceholder'))}" oninput="q.place=this.value"></div>
+      <div class="field"><label>${esc(t('phone'))}</label><input class="inp" type="tel" inputmode="tel" value="${esc(q.phone)}" placeholder="98765 43210" oninput="q.phone=this.value"></div>
+      <div class="field" style="margin-bottom:0"><label>${esc(t('validTill'))}</label><input class="inp" type="date" value="${esc(q.validTill)}" oninput="q.validTill=this.value"></div>
+    </div>`;
+}
+function itemLine(it){
+  const u=unitOf(it),q=(+it.qty||1)>1?' × '+(+it.qty):'';
+  if(u==='sqft')return `${itemSizeText(it)} = ${itemMeasureText(it)} × ₹${fmt(it.price)}${q}`;
+  if(u==='rft')return `${itemMeasureText(it)} × ₹${fmt(it.price)}/${t('u_rft')}${q}`;
+  if(u==='nos')return `${+it.qty||1} ${t('u_nos')} × ₹${fmt(it.price)}`;
+  return t('u_ls');
+}
+function editorStep2(){
+  if(!q.items.length)return emptyState('ti-ruler-measure',t('firstItem'),t('firstItemSub'),`<button class="btn btn-primary mt12" onclick="editItem(-1)"><i class="ti ti-plus"></i>${esc(t('addItem'))}</button>`);
+  return q.items.map((it,i)=>`<button class="card" onclick="editItem(${i})"><div class="row"><span class="b ell">${esc(it.type||t('item')+' '+(i+1))}</span><span class="b">₹${fmt(itemTotal(it))}</span></div><div class="m mt4">${esc(itemLine(it))}</div></button>`).join('')
+    +`<button class="dashed" onclick="editItem(-1)"><i class="ti ti-plus"></i> ${esc(t('addItem'))}</button>`;
+}
+function editorStep3(){
+  const paid=sumPayments(q.payments);
+  return `<button class="card row" style="justify-content:flex-start;gap:12px" onclick="openPreview()"><div class="thumb" id="thumb"></div><div><div class="m">${esc(t('pdfPreview'))}</div><div class="b mt4">${esc(t('tapToView'))}</div></div></button>
+    <div class="card"><div class="row"><span class="b ell">${esc(q.name)}</span><button class="link" onclick="jumpStep(1)">${esc(t('edit'))}</button></div><div class="m mt4">${esc([q.place,q.phone].filter(Boolean).join(' · ')||'—')}</div>${q.validTill?`<div class="m">${esc(t('validTill'))}: ${esc(fmtDate(new Date(q.validTill+'T00:00'),{day:'numeric',month:'short',year:'numeric'}))}</div>`:''}</div>
+    <div class="card">
+      <div class="row" style="padding:4px 0"><span class="m">${esc(t('subtotal'))}</span><span id="rv-sub"></span></div>
+      <div class="row" style="padding:4px 0"><span class="row" style="gap:6px"><span class="m">${esc(t('discount'))}</span><input class="inp pct" type="number" inputmode="decimal" value="${esc(q.tax.discVal)}" oninput="q.tax.discVal=parseFloat(this.value)||0;updateReviewTotals()"><span class="m">%</span></span><span class="row"><span id="rv-disc" class="m"></span><button class="toggle ${q.tax.disc?'on':''}" onclick="q.tax.disc=!q.tax.disc;this.classList.toggle('on',q.tax.disc);updateReviewTotals()" aria-label="${esc(t('discount'))}"></button></span></div>
+      <div class="row" style="padding:4px 0"><span class="row" style="gap:6px"><span class="m">${esc(t('gst'))}</span><input class="inp pct" type="number" inputmode="decimal" value="${esc(q.tax.gstVal)}" oninput="q.tax.gstVal=parseFloat(this.value)||0;updateReviewTotals()"><span class="m">%</span></span><span class="row"><span id="rv-gst" class="m"></span><button class="toggle ${q.tax.gst?'on':''}" onclick="q.tax.gst=!q.tax.gst;this.classList.toggle('on',q.tax.gst);updateReviewTotals()" aria-label="${esc(t('gst'))}"></button></span></div>
+      <div class="row" style="border-top:1px dashed var(--line2);margin-top:6px;padding-top:8px"><span class="b">${esc(t('total'))}</span><span class="b" id="rv-total" style="font-size:19px;color:var(--blue)"></span></div>
+    </div>
+    <div class="card"><div class="row"><span class="b">${esc(t('payments'))}</span><button class="link" onclick="openPaymentSheet()">+ ${esc(t('record'))}</button></div>
+      <div class="progress mt8"><div id="rv-bar"></div></div>
+      <div class="row mt4"><span class="m" style="color:var(--paid)">${esc(tf('receivedAmt',{v:fmt(paid)}))}</span><span class="m" id="rv-due" style="color:var(--due)"></span></div>
+      ${q.payments.map((p,i)=>`<div class="srow" style="padding:8px 0"><span class="m">${esc(fmtDate(new Date(p.date),{day:'numeric',month:'short',year:'numeric'}))}${p.mode?' · '+esc(t('mode_'+p.mode)):''}${p.note?' · '+esc(p.note):''}</span><span class="row"><span class="b">₹${fmt(p.amount)}</span><button class="icon-btn" style="width:32px;height:32px;font-size:17px;color:var(--red)" onclick="removePayment(${i})" aria-label="${esc(t('deleteItem'))}"><i class="ti ti-x"></i></button></span></div>`).join('')}
+    </div>
+    <div class="card"><label class="lbl">${esc(t('notesTerms'))}</label><textarea class="inp" oninput="q.notes=this.value">${esc(q.notes)}</textarea></div>
+    ${q.id?`<button class="btn btn-danger" style="margin-top:6px" onclick="deleteQuote()"><i class="ti ti-trash"></i>${esc(t('deleteQuote'))}</button>`:''}`;
+}
+function updateReviewTotals(){
+  const {sub,disc,gst,total}=qTotals(),paid=sumPayments(q.payments);
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};
+  set('rv-sub','₹'+fmt(sub));set('rv-disc',q.tax.disc?'-₹'+fmt(disc):'');set('rv-gst',q.tax.gst?'+₹'+fmt(gst):'');set('rv-total','₹'+fmt(total));
+  set('rv-due',tf('dueAmt',{v:fmt(Math.max(0,total-paid))}));
+  const bar=document.getElementById('rv-bar');if(bar)bar.style.width=(total>0?Math.min(100,paid/total*100):0)+'%';
+}
+function renderThumb(){const el=document.getElementById('thumb');if(el)el.innerHTML='<div>'+buildA4(q)+'</div>'}
+function deleteQuote(){
+  if(!q?.id||!confirm(tf('deleteConfirm',{q:q.quotNo})))return;
+  quotes=quotes.filter(e=>String(e.id)!==String(q.id));markDeleted([q.id]);persistQuotes();
+  q=null;toast(t('deleted'));exitEditor();
+}
+function saveAndSend(){if(!canReach(3))return;if(saveQuote(false,{silent:true}))shareWA()}
+
+// ── Customer picker sheet ──
+function openCustomerPicker(){pickSearch='';openSheet(`<h3>${esc(t('pickCustomer'))}</h3><div class="search"><i class="ti ti-search"></i><input type="search" placeholder="${esc(t('searchCustomers'))}" oninput="pickSearch=this.value;renderPickList()"></div><div id="pick-list"></div>`);renderPickList()}
+function renderPickList(){
+  const el=document.getElementById('pick-list');if(!el)return;const s=pickSearch.trim().toLowerCase();
+  const list=getCustomers().filter(c=>!s||[c.name,c.place,c.phone].join(' ').toLowerCase().includes(s));
+  el.innerHTML=list.length?list.map(c=>`<button class="card row" style="justify-content:flex-start;gap:12px" data-k="${esc(c.key)}" onclick="pickCustomer(this.dataset.k)"><div class="av">${esc(initials(c.name))}</div><div style="min-width:0"><div class="b ell">${esc(c.name)}</div><div class="m ell">${esc([c.place,c.phone].filter(Boolean).join(' · '))}</div></div></button>`).join(''):emptyState('ti-search',t('noMatch'));
+}
+function pickCustomer(key){const c=getCustomers().find(x=>x.key===key);if(c){q.name=c.name;q.place=c.place;q.phone=c.phone}closeOverlay();render()}
+
+// ── Item sheet ──
+function suggestedTypes(){
+  const seen=new Set(),out=[];
+  quotes.forEach(e=>(e.items||[]).forEach(it=>{const v=String(it.type||'').trim();if(v&&!seen.has(v.toLowerCase())&&out.length<6){seen.add(v.toLowerCase());out.push(v)}}));
+  TYPE_DEFAULTS[language].forEach(v=>{if(out.length<6&&!seen.has(v.toLowerCase())){seen.add(v.toLowerCase());out.push(v)}});
+  return out;
+}
+function lastPriceFor(type,unit){
+  const k=String(type||'').trim().toLowerCase();if(!k)return 0;
+  for(const e of [...quotes].sort((a,b)=>+b.id-+a.id))for(const it of (e.items||[]))if(String(it.type||'').trim().toLowerCase()===k&&unitOf(it)===(unit||'sqft')&&+it.price>0)return +it.price;
+  return 0;
+}
+function editItem(i){
+  itemIndex=i;itemDraft=i>=0?{...q.items[i],unit:unitOf(q.items[i])}:{type:'',unit:'sqft',w:0,wf:0,h:0,hf:0,price:0,qty:1};
+  openSheet(itemSheetHtml());refreshItemSheet();
+}
+function setUnit(u){itemDraft.unit=u;document.querySelector('#sheet .sheet-in').innerHTML='<div class="grab"></div>'+itemSheetHtml();refreshItemSheet()}
+function itemSheetHtml(){
+  const i=itemIndex,u=itemDraft.unit;
+  const num=(key,int)=>`<div class="num"><button onclick="bump('${key}',-1)" aria-label="minus">−</button><input id="it-${key}" type="number" inputmode="${int?'numeric':'decimal'}" value="${+itemDraft[key]||''}" placeholder="${int?1:0}" oninput="itemDraft.${key}=${int?'Math.max(1,parseInt(this.value)||1)':'Math.max(0,parseFloat(this.value)||0)'};refreshItemSheet()"><button onclick="bump('${key}',1)" aria-label="plus">+</button></div>`;
+  const seg=key=>`<div class="seg mt8" id="seg-${key}">${[[0,'0'],[.25,'¼'],[.5,'½'],[.75,'¾']].map(([v,l])=>`<button data-v="${v}" class="${(+itemDraft[key]||0)===v?'on':''}" onclick="setFrac('${key}',${v})">${l}</button>`).join('')}</div>`;
+  const rateLabel={sqft:'ratePerSqft',rft:'ratePerRft',nos:'ratePerNo',ls:'lumpAmount'}[u];
+  const price=`<div><label class="lbl">${esc(t(rateLabel))}</label><input class="inp" id="it-price" type="number" inputmode="decimal" value="${+itemDraft.price||''}" placeholder="0" oninput="itemDraft.price=Math.max(0,parseFloat(this.value)||0);refreshItemSheet()"><div id="it-hint" class="mt4"></div></div>`;
+  const qty=`<div><label class="lbl">${esc(t('qty'))}</label>${num('qty',true)}</div>`;
+  const size=u==='sqft'?`<div class="g2 mt12"><div><label class="lbl">${esc(t('widthFt'))}</label>${num('w')}${seg('wf')}</div><div><label class="lbl">${esc(t('heightFt'))}</label>${num('h')}${seg('hf')}</div></div>`
+    :u==='rft'?`<div class="mt12"><label class="lbl">${esc(t('lengthFt'))}</label><div class="g2"><div>${num('w')}</div><div>${seg('wf').replace('seg mt8','seg')}</div></div></div>`:'';
+  return `<h3>${esc(t(i>=0?'editItem':'addItem'))}</h3>
+    <label class="lbl">${esc(t('type'))}</label>
+    <div class="chips" id="type-chips">${suggestedTypes().map(v=>`<button class="chip" data-t="${esc(v)}" onclick="pickType(this.dataset.t)">${esc(v)}</button>`).join('')}</div>
+    <input class="inp" id="it-type" value="${esc(itemDraft.type)}" placeholder="${esc(t('typePlaceholder'))}" oninput="itemDraft.type=this.value;refreshItemSheet()">
+    <label class="lbl mt12">${esc(t('unit'))}</label>
+    <div class="seg" id="unit-seg">${UNITS.map(x=>`<button class="${u===x?'on':''}" onclick="setUnit('${x}')">${esc(t('unit_'+x))}</button>`).join('')}</div>
+    ${size}
+    <div class="g2 mt12">${price}${u==='ls'?'':qty}</div>
+    <div class="calc"><span id="it-area"></span><b id="it-total" style="font-size:17px"></b></div>
+    <button class="btn btn-primary" onclick="commitItem()">${esc(t(i>=0?'saveItem':'addItem'))}</button>
+    ${i>=0?`<button class="btn btn-danger mt8" onclick="deleteItem()"><i class="ti ti-trash"></i>${esc(t('deleteItem'))}</button>`:''}`;
+}
+function bump(key,d){let v=(+itemDraft[key]||0)+d;v=key==='qty'?Math.max(1,v):Math.max(0,v);itemDraft[key]=v;document.getElementById('it-'+key).value=v;refreshItemSheet()}
+function setFrac(key,v){itemDraft[key]=v;document.querySelectorAll('#seg-'+key+' button').forEach(b=>b.classList.toggle('on',+b.dataset.v===v));refreshItemSheet()}
+function pickType(v){itemDraft.type=v;document.getElementById('it-type').value=v;refreshItemSheet()}
+function usePrice(v){itemDraft.price=v;document.getElementById('it-price').value=v;refreshItemSheet()}
+function refreshItemSheet(){
+  const typ=String(itemDraft.type||'').trim().toLowerCase();
+  document.querySelectorAll('#type-chips .chip').forEach(c=>c.classList.toggle('on',c.dataset.t.toLowerCase()===typ));
+  const u=itemDraft.unit;
+  document.getElementById('it-area').textContent=u==='sqft'?`${itemSizeText(itemDraft)} = ${itemMeasureText(itemDraft)}`:u==='rft'?itemMeasureText(itemDraft)+((+itemDraft.qty||1)>1?' × '+(+itemDraft.qty):''):u==='nos'?(+itemDraft.qty||1)+' '+t('u_nos'):t('u_ls');
+  document.getElementById('it-total').textContent='₹'+fmt(itemTotal(itemDraft));
+  const last=lastPriceFor(itemDraft.type,itemDraft.unit),hint=document.getElementById('it-hint');
+  hint.innerHTML=last&&last!==+itemDraft.price?`<button class="link" onclick="usePrice(${last})">${esc(tf('lastUsed',{v:fmt(last)}))}</button>`:'';
+}
+function commitItem(){
+  if(itemTotal(itemDraft)<=0){toast(t('itemIncomplete'));return}
+  const u=itemDraft.unit,hasW=u==='sqft'||u==='rft',hasH=u==='sqft';
+  const it={type:String(itemDraft.type||'').trim(),unit:u,w:hasW?+itemDraft.w||0:0,wf:hasW?+itemDraft.wf||0:0,h:hasH?+itemDraft.h||0:0,hf:hasH?+itemDraft.hf||0:0,price:+itemDraft.price||0,qty:u==='ls'?1:Math.max(1,parseInt(itemDraft.qty)||1)};
+  if(itemIndex>=0)q.items[itemIndex]=it;else q.items.push(it);
+  closeOverlay();render();
+}
+function deleteItem(){if(itemIndex>=0)q.items.splice(itemIndex,1);closeOverlay();render()}
+
+// ── Payment sheet ──
+function openPaymentSheet(){
+  const {total}=qTotals(),bal=Math.max(0,total-sumPayments(q.payments));
+  if(bal<=0.5){toast(t('fullyPaid'));return}
+  payDraft={mode:'cash'};
+  const quick=[[.3,'30%'],[.5,'50%']].map(([p,l])=>{const v=Math.min(Math.round(total*p),Math.round(bal));return `<button class="chip" onclick="setPayAmount(${v})">${l} · ₹${fmt(v)}</button>`}).join('')+`<button class="chip" onclick="setPayAmount(${Math.round(bal)})">${esc(t('full'))} · ₹${fmt(bal)}</button>`;
+  openSheet(`<div class="row" style="margin-bottom:12px"><h3 style="margin:0">${esc(t('recordPayment'))}</h3><span class="m">${esc(tf('dueAmt',{v:fmt(bal)}))}</span></div>
+    <div class="field"><label>${esc(t('amount'))}</label><input class="inp" id="pay-amt" type="number" inputmode="decimal" placeholder="₹" style="font-size:20px;font-weight:600" oninput="document.getElementById('pay-err').textContent=''"></div>
+    <div class="chips">${quick}</div>
+    <div class="field"><label>${esc(t('mode'))}</label><div class="seg" id="pay-mode">${PAY_MODES.map(m=>`<button data-m="${m}" class="${m==='cash'?'on':''}" onclick="payDraft.mode='${m}';document.querySelectorAll('#pay-mode button').forEach(b=>b.classList.toggle('on',b.dataset.m==='${m}'))">${esc(t('mode_'+m))}</button>`).join('')}</div></div>
+    <div class="g2"><div class="field"><label>${esc(t('date'))}</label><input class="inp" id="pay-date" type="date" value="${localISODate(new Date())}"></div><div class="field"><label>${esc(t('note'))}</label><input class="inp" id="pay-note" placeholder="${esc(t('notePlaceholder'))}"></div></div>
+    <div class="err" id="pay-err"></div>
+    <button class="btn btn-green" onclick="savePayment()">${esc(t('savePayment'))}</button>`);
+}
+function setPayAmount(v){const el=document.getElementById('pay-amt');el.value=v;document.getElementById('pay-err').textContent=''}
+function savePayment(){
+  const amt=parseFloat(document.getElementById('pay-amt').value),{total}=qTotals(),bal=total-sumPayments(q.payments);
+  const err=document.getElementById('pay-err');
+  if(!(amt>0)){err.textContent=t('enterAmount');return}
+  if(amt-bal>0.5){err.textContent=t('paymentTooHigh');return} // balance is shown rounded to the rupee
+  const ds=document.getElementById('pay-date').value,parts=ds.split('-').map(Number);
+  const date=parts.length===3&&parts[0]?new Date(parts[0],parts[1]-1,parts[2],12).toISOString():new Date().toISOString();
+  q.payments.push({amount:amt,date,mode:payDraft.mode,note:document.getElementById('pay-note').value.trim()});
+  closeOverlay();
+  if(q.id)saveQuote(false,{silent:true});
+  render();toast(t('paymentAdded'));
+}
+function removePayment(i){if(!confirm(t('deletePaymentConfirm')))return;q.payments.splice(i,1);if(q.id)saveQuote(q.draft,{silent:true});render()}
+
+// ── Full preview sheet ──
+function openPreview(){
+  openSheet(`<div class="row" style="margin-bottom:10px"><h3 style="margin:0">${esc(currentQuoteNo())}</h3><button class="icon-btn" style="color:var(--sub)" onclick="closeOverlay()" aria-label="${esc(t('close'))}"><i class="ti ti-x"></i></button></div><div class="pv-box" id="pv-box"><div>${buildA4(q)}</div></div>`);
+  requestAnimationFrame(()=>{const box=document.getElementById('pv-box');if(!box)return;const inner=box.firstElementChild,s=box.clientWidth/794;inner.style.transform=`scale(${s})`;box.style.height=Math.ceil(Math.max(1123,inner.scrollHeight)*s)+'px'});
+}
+
+// ═══════════════ A4 / PDF ═══════════════
+// ── UPI ──
+function isValidUpi(id){return /^[a-zA-Z0-9._-]{2,256}@[a-zA-Z][a-zA-Z0-9.-]{1,64}$/.test(String(id||'').trim())}
+// Standard UPI deep link without an amount, so the customer types what they pay (any UPI app can scan it).
+function upiLink(note){
+  const p=['pa='+encodeURIComponent(settings.upiId.trim()),'pn='+encodeURIComponent((settings.upiName||settings.bizName||'').trim())];
+  p.push('cu=INR');
+  if(note)p.push('tn='+encodeURIComponent(note));
+  return 'upi://pay?'+p.join('&');
+}
+function qrDataUrl(text){
+  if(typeof qrcode!=='function')return '';
+  const qr=qrcode(0,'M');qr.addData(text);qr.make();
+  return qr.createDataURL(6,2);
+}
+function saveUpiId(input){
+  const v=input.value.trim();
+  if(v&&!isValidUpi(v)){toast(t('upiInvalid'));input.value=settings.upiId||'';return}
+  updateSetting('upiId',v);render();
+}
+// Indian-system number to English words (lakh / crore), for "Rupees … only".
+function amountInWords(num){
+  num=Math.round(+num||0);
+  const a=['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
+  const b=['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
+  const two=n=>n<20?a[n]:b[Math.floor(n/10)]+(n%10?' '+a[n%10]:'');
+  const three=n=>(n>=100?a[Math.floor(n/100)]+' Hundred'+(n%100?' ':''):'')+(n%100?two(n%100):'');
+  if(!num)return 'Zero';
+  const parts=[],crore=Math.floor(num/1e7);num%=1e7;const lakh=Math.floor(num/1e5);num%=1e5;const thou=Math.floor(num/1e3);num%=1e3;
+  if(crore)parts.push((crore>=100?three(crore):two(crore))+' Crore');
+  if(lakh)parts.push(two(lakh)+' Lakh');
+  if(thou)parts.push(two(thou)+' Thousand');
+  if(num)parts.push(three(num));
+  return parts.join(' ');
+}
+// Payment stages are read from the notes ("Advance: 30%" …). Shown only when they add up to 100%.
+function paymentSchedule(notes){
+  const out=[];
+  String(notes||'').split('\n').forEach(line=>{
+    const m=/(\d+(?:\.\d+)?)\s*%/.exec(line);if(!m)return;
+    let label=line.slice(0,m.index);
+    const colon=label.search(/[:：]/);if(colon>=0)label=label.slice(0,colon); // "After Full Work Complete: Balance 20%" -> "After Full Work Complete"
+    label=label.replace(/^[\s•*\-–·]+/,'').replace(/[:\-–\s]+$/,'').trim();
+    if(!label)label=line.replace(/^[\s•*\-–·]+/,'').trim();
+    out.push({label,pct:parseFloat(m[1])});
+  });
+  const sum=out.reduce((s,x)=>s+x.pct,0);
+  return out.length>=2&&Math.abs(sum-100)<0.01?out:[];
+}
+const PDF_WALNUT='background-color:#4a2c17;background-image:repeating-linear-gradient(92deg,rgba(255,255,255,.05) 0 2px,transparent 2px 9px),repeating-linear-gradient(88deg,rgba(0,0,0,.18) 0 1px,transparent 1px 14px),linear-gradient(180deg,#6b4226,#3d2312)';
+// Walnut letterhead quotation (A4, 794px wide, 50px page padding).
+function buildA4(qq){
+  const serif="font-family:Georgia,'Times New Roman',serif",biz=esc(settings.bizName||'');
+  const {sub,disc,gst,total}=calcTotals(qq.items,qq.tax),paid=sumPayments(qq.payments),bal=Math.max(0,total-paid);
+  const dOpt={day:'2-digit',month:'short',year:'numeric'};
+  const dateStr=fmtDate(qq.id?entryCreated(qq):new Date(),dOpt);
+  const validStr=qq.validTill?fmtDate(new Date(qq.validTill+'T00:00'),dOpt):'';
+  const contacts=(settings.contacts||[]).filter(c=>String(c.name||'').trim()||String(c.phone||'').trim());
+  const label='font-size:10px;color:#8a5a2b;letter-spacing:1.5px;font-weight:700;text-transform:uppercase';
+  const th='padding:9px 8px;font-size:10.5px;letter-spacing:.6px;color:#4a2c17;text-transform:uppercase;border-bottom:2px solid #4a2c17;font-weight:700';
+  const td='padding:9px 8px;font-size:12px;color:#2a2a2a;border-bottom:1px solid #e8e0d2';
+  const ft=t('pdfFt');
+  const dash='<span style="color:#bbb">—</span>',small=v=>`<span style="font-size:10px;color:#888"> ${v}</span>`;
+  const rows=(qq.items||[]).map((r,i)=>{
+    const u=unitOf(r),size=itemSizeText(r);
+    return `<tr><td style="${td};text-align:center;color:#888">${i+1}</td><td style="${td};font-weight:600">${esc(r.type||t('item')+' '+(i+1))}${u==='ls'?small(t('u_ls')):''}</td><td style="${td};text-align:center">${size?size+' '+ft:dash}</td><td style="${td};text-align:right">${u==='sqft'||u==='rft'?fmtTs(itemArea(r))+small(t('u_'+u)):dash}</td><td style="${td};text-align:right">${u==='ls'?dash:fmt(r.price)+small('/'+t('u_'+u))}</td><td style="${td};text-align:center">${u==='ls'?dash:(+r.qty||1)}</td><td style="${td};text-align:right;font-weight:700">${fmt(itemTotal(r))}</td></tr>`;
+  }).join('');
+  const tr=(l,v,st='')=>`<tr><td style="padding:6px 12px;font-size:12px;color:#555">${l}</td><td style="padding:6px 12px;font-size:12px;text-align:right;white-space:nowrap;${st}">${v}</td></tr>`;
+  const sched=paymentSchedule(qq.notes);
+  // UPI "scan to pay" QR, only when a valid UPI ID is set and something is still due
+  let upiBlock='';
+  if(isValidUpi(settings.upiId)&&bal>0.5){
+    const img=qrDataUrl(upiLink((qq.quotNo||nextQuoteNo())+' '+(qq.name||'')));
+    if(img)upiBlock=`<div style="display:flex;gap:14px;align-items:center;margin-top:18px;border:1px solid #e8e0d2;border-left:4px solid #C9A227;background:#fcfaf6;padding:10px 12px">
+      <img src="${img}" alt="" style="width:108px;height:108px;image-rendering:pixelated;flex-shrink:0;background:#fff">
+      <div style="min-width:0"><div style="${label}">${t('pdfScanPay')}</div>
+        <div style="font-size:11px;color:#555;margin-top:6px">${t('pdfUpiId')}</div><div style="font-size:13px;color:#3d2312;font-weight:700;word-break:break-all">${esc(settings.upiId.trim())}</div>
+        <div style="font-size:10.5px;color:#888;margin-top:6px">${t('pdfUpiApps')}</div>
+      </div></div>`;
+  }
+  const infoRow=(l,v)=>`<div style="display:flex;justify-content:space-between;gap:10px"><span>${l}</span><b style="color:#3d2312">${v}</b></div>`;
+  return `
+  <div style="margin:-50px -50px 0;${PDF_WALNUT};padding:24px 50px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:4px solid #C9A227">
+    <div style="display:flex;align-items:center;gap:16px;min-width:0">
+      <img src="assets/raya-emblem.png" alt="" style="width:74px;height:74px;border-radius:12px;background:#fff;object-fit:contain;flex-shrink:0">
+      <div style="min-width:0"><div style="${serif};font-size:20px;color:#F2D27A;font-weight:700;letter-spacing:.5px;white-space:nowrap">${biz}</div>
+        ${settings.bizTag?`<div style="font-size:10.5px;color:#e8d3b0;letter-spacing:2.5px;margin-top:3px">${esc(settings.bizTag)}</div>`:''}
+        ${contacts.map((c,i)=>`<div style="font-size:11.5px;color:#f3e6cf;margin-top:${i?2:7}px">&#9742;&nbsp; ${c.name?'<b style="color:#fff;font-weight:600">'+esc(String(c.name).trim())+'</b>: ':''}${esc(String(c.phone||'').trim())}</div>`).join('')}</div>
+    </div>
+    <div style="text-align:right;flex-shrink:0"><div style="${serif};font-size:23px;color:#fff;letter-spacing:2px">${t('pdfQuotation')}</div><div style="font-size:13px;color:#F2D27A;margin-top:4px;font-weight:700">${esc(qq.quotNo||nextQuoteNo())}</div></div>
+  </div>
+  <div style="display:flex;gap:20px;margin:26px 0 22px">
+    <div style="flex:1.4;border:1px solid #e8e0d2;border-left:4px solid #C9A227;padding:12px 16px;background:#fcfaf6">
+      <div style="${label}">${t('pdfFor')}</div>
+      <div style="${serif};font-size:19px;color:#3d2312;font-weight:700;margin-top:4px">${esc(qq.name||'-')}</div>
+      <div style="font-size:12px;color:#555;margin-top:3px">${esc(qq.place||'')}${qq.place&&qq.phone?' &nbsp;·&nbsp; ':''}${qq.phone?'&#9742; '+esc(qq.phone):''}</div>
+    </div>
+    <div style="flex:1;border:1px solid #e8e0d2;padding:12px 16px;font-size:12px;color:#555;line-height:1.9">
+      ${infoRow(t('pdfNo'),esc(qq.quotNo||nextQuoteNo()))}${infoRow(t('pdfDate'),esc(dateStr))}${validStr?infoRow(t('pdfValid'),esc(validStr)):''}
+    </div>
+  </div>
+  <table style="width:100%;border-collapse:collapse">
+    <thead><tr style="background:#f6efe3"><th style="${th};width:34px">#</th><th style="${th};text-align:left">${t('pdfDesc')}</th><th style="${th}">${t('pdfSize')}</th><th style="${th};text-align:right">${t('pdfMeasure')}</th><th style="${th};text-align:right">${t('pdfRate')}</th><th style="${th}">${t('pdfQty')}</th><th style="${th};text-align:right">${t('pdfAmount')}</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table>
+  <div style="display:flex;gap:24px;margin-top:18px;align-items:flex-start">
+    <div style="flex:1;min-width:0">
+      <div style="${label}">${t('pdfWords')}</div>
+      <div style="font-size:12.5px;color:#3d2312;margin-top:4px;font-style:italic">Rupees ${amountInWords(total)} only</div>
+      ${sched.length?`<div style="${label};margin-top:18px">${t('pdfSchedule')}</div>
+      <table style="width:100%;border-collapse:collapse;margin-top:6px">${sched.map(s=>`<tr><td style="padding:5px 0;font-size:12px;color:#555;border-bottom:1px dashed #e0d6c4">${esc(s.label)}</td><td style="padding:5px 8px;font-size:12px;color:#555;text-align:center;border-bottom:1px dashed #e0d6c4">${fmtTs(s.pct)}%</td><td style="padding:5px 0;font-size:12px;text-align:right;font-weight:600;border-bottom:1px dashed #e0d6c4;white-space:nowrap">₹${fmt(total*s.pct/100)}</td></tr>`).join('')}</table>`:''}
+      ${upiBlock}
+    </div>
+    <div style="width:290px;border:1px solid #e8e0d2;flex-shrink:0">
+      <table style="width:100%;border-collapse:collapse">
+        ${tr(t('subtotal'),'₹'+fmt(sub))}
+        ${qq.tax.disc?tr(`${t('discount')} (${esc(qq.tax.discVal)}%)`,'− ₹'+fmt(disc),'color:#b42318'):''}
+        ${qq.tax.gst?tr(`${t('gst')} (${esc(qq.tax.gstVal)}%)`,'+ ₹'+fmt(gst)):''}
+      </table>
+      <div style="${PDF_WALNUT};display:flex;justify-content:space-between;align-items:center;padding:11px 12px"><span style="color:#e8d3b0;font-size:12px;letter-spacing:1px;font-weight:700">${t('pdfGrand')}</span><span style="${serif};color:#F2D27A;font-size:21px;font-weight:700">₹${fmt(total)}</span></div>
+      ${paid>0?`<table style="width:100%;border-collapse:collapse">${tr(t('a4Received'),'₹'+fmt(paid),'color:#1f7a3d')}${tr(`<b style="color:#3d2312">${t('a4Balance')}</b>`,'<b>₹'+fmt(bal)+'</b>','color:#b42318')}</table>`:''}
+    </div>
+  </div>
+  ${qq.notes?`<div style="margin-top:22px"><div style="${label}">${t('pdfTerms')}</div><div style="font-size:11.5px;color:#555;line-height:1.7;white-space:pre-wrap;margin-top:4px">${esc(qq.notes)}</div></div>`:''}
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-top:46px">
+    <div style="font-size:11px;color:#888;max-width:340px;line-height:1.6">${t('pdfDisclaimer')}</div>
+    <div style="text-align:center;flex-shrink:0"><div style="font-size:11px;color:#3d2312;margin-bottom:38px">${tf('pdfForBiz',{b:'<b>'+biz+'</b>'})}</div><div style="border-top:1px solid #3d2312;width:200px;padding-top:5px;font-size:11px;color:#555">${t('a4Sign')}</div></div>
+  </div>
+  <div style="margin-top:auto;padding-top:30px"><div style="border-top:2px solid #C9A227;padding-top:8px;font-size:10.5px;color:#8a5a2b">${tf('pdfThanks',{b:biz})}</div></div>`;
+}
+function renderA4(){document.getElementById('a4-page').innerHTML=buildA4(q)}
+const A4_W=794,A4_H=1123,PAGE_MARGIN=50;
+function waitForImages(root){return Promise.all(Array.from(root.querySelectorAll('img')).map(img=>img.complete?null:new Promise(r=>{img.onload=img.onerror=r})))}
+// Renders the whole quotation (any length) and returns the canvas plus safe page-break points (row bottoms, CSS px).
+async function captureA4(){
+  renderA4();
+  const el=document.getElementById('a4-page');
+  await waitForImages(el);await new Promise(r=>setTimeout(r,100));
+  const base=el.getBoundingClientRect().top;
+  const breaks=Array.from(el.querySelectorAll('#a4-page > table > * > tr, #a4-page > div')).map(n=>Math.ceil(n.getBoundingClientRect().bottom-base)).sort((a,b)=>a-b);
+  const contentBottom=(breaks[breaks.length-1]||0)+PAGE_MARGIN;
+  const height=Math.max(A4_H,Math.ceil(el.scrollHeight),contentBottom);
+  const canvas=await html2canvas(el,{scale:2,useCORS:true,backgroundColor:'#ffffff',width:A4_W,height,windowWidth:A4_W});
+  return {canvas,height,breaks,contentBottom};
+}
+// Splits the capture into A4 pages, breaking between rows rather than through them.
+function paginate({height,breaks,contentBottom}){
+  if(contentBottom<=A4_H+4)return [{start:0,end:Math.min(height,A4_H),top:0}]; // +4: sub-pixel rounding
+  const pages=[];let start=0;
+  while(start<contentBottom-PAGE_MARGIN-4){
+    const top=pages.length?PAGE_MARGIN:0;let end=start+(A4_H-PAGE_MARGIN-top);
+    if(end<contentBottom){const fit=breaks.filter(b=>b>start+40&&b<=end);if(fit.length)end=fit[fit.length-1]}else end=contentBottom;
+    pages.push({start,end,top});start=end;
+  }
+  return pages;
+}
+function safeFilePart(v){return String(v||'Customer').trim().replace(/\s+/g,'_').replace(/[<>:"|?*\/\\]/g,'_')}
+function exportFileName(ext){return currentQuoteNo()+'_'+safeFilePart(q.name)+'.'+ext}
+async function createPdfBlob(){
+  const cap=await captureA4(),{jsPDF}=window.jspdf,pdf=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'}),scale=cap.canvas.width/A4_W;
+  const pages=paginate(cap);
+  pages.forEach((pg,i)=>{
+    const page=document.createElement('canvas');page.width=cap.canvas.width;page.height=Math.round(A4_H*scale);
+    const ctx=page.getContext('2d');ctx.fillStyle='#ffffff';ctx.fillRect(0,0,page.width,page.height);
+    const h=Math.round((pg.end-pg.start)*scale);
+    ctx.drawImage(cap.canvas,0,Math.round(pg.start*scale),page.width,h,0,Math.round(pg.top*scale),page.width,h);
+    if(pages.length>1){ctx.fillStyle='#8a5a2b';ctx.font=Math.round(10.5*scale)+'px Arial';ctx.textAlign='right';ctx.fillText(tf('pdfPage',{i:i+1,n:pages.length}),Math.round((A4_W-50)*scale),Math.round((A4_H-22)*scale))}
+    if(i)pdf.addPage();
+    pdf.addImage(page.toDataURL('image/jpeg',.95),'JPEG',0,0,210,297);
+  });
+  return {blob:pdf.output('blob'),filename:exportFileName('pdf')};
+}
+function blobAsBase64(blob){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.onerror=rej;r.readAsDataURL(blob)})}
+function canvasToBlob(c,type,qual){return new Promise((res,rej)=>c.toBlob(b=>b?res(b):rej(new Error('Image export failed')),type,qual))}
+function sharePlugin(){return window.SRWPdfShare||window.Capacitor?.Plugins?.PdfShare}
+function isNativeApp(){return !!window.Capacitor?.isNativePlatform?.()}
+// In the Android WebView a link "download" does nothing, so files go through the native share sheet.
+async function saveOrShareFile(blob,filename,mimeType){
+  const plugin=sharePlugin();
+  if(plugin&&isNativeApp()){await plugin.sharePdf({filename,mimeType,pdfBase64:await blobAsBase64(blob),dialogTitle:t('saveOrShare')});return 'shared'}
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  return 'downloaded';
+}
+function setStatus(s){const el=document.getElementById('status');if(el)el.textContent=s}
+async function generatePDF(){
+  setStatus(t('pdfPreparing'));
+  try{const f=await createPdfBlob();const how=await saveOrShareFile(f.blob,f.filename,'application/pdf');setStatus('');if(how==='downloaded')toast(t('pdfSaved'))}
+  catch(e){setStatus('');toast(e.message||t('shareFailed'))}
+}
+async function generateImage(){
+  setStatus(t('imagePreparing'));
+  try{const {canvas}=await captureA4();const how=await saveOrShareFile(await canvasToBlob(canvas,'image/jpeg',.95),exportFileName('jpg'),'image/jpeg');setStatus('');if(how==='downloaded')toast(t('imageSaved'))}
+  catch(e){setStatus('');toast(e.message||t('shareFailed'))}
+}
+async function shareWA(){
+  const {total}=qTotals(),paid=sumPayments(q.payments);
+  const msg=`*${settings.bizName||''}*\n${t('quotationNumber')}: ${currentQuoteNo()}\n${t('siteShare')}: ${q.name||'-'}${q.place?' ('+q.place+')':''}\n${t('total')}: ₹${fmt(total)}`+(paid>0?`\n${t('totalReceived')}: ₹${fmt(paid)}\n${t('balanceDue')}: ₹${fmt(Math.max(0,total-paid))}`:'');
+  setStatus(t('sharePreparing'));
+  try{
+    const f=await createPdfBlob(),plugin=sharePlugin();
+    if(plugin&&isNativeApp()){await plugin.sharePdf({filename:f.filename,mimeType:'application/pdf',pdfBase64:await blobAsBase64(f.blob),text:msg,dialogTitle:t('whatsappShare')});setStatus('');return}
+    const file=new File([f.blob],f.filename,{type:'application/pdf'});
+    if(navigator.canShare?.({files:[file]})&&navigator.share){await navigator.share({title:t('whatsappShare'),text:msg,files:[file]});setStatus('');return}
+    await saveOrShareFile(f.blob,f.filename,'application/pdf');
+    window.open('https://wa.me/'+(waNumber(q.phone)||'')+'?text='+encodeURIComponent(msg),'_blank');setStatus('');toast(t('pdfDownloadedAttach'));
+  }catch(e){setStatus('');if(e?.name!=='AbortError')toast(e.message||t('shareFailed'))}
+}
+async function doPrint(){
+  // Android WebView has no window.print(); the share sheet lets a print service / PDF app print it.
+  if(isNativeApp()&&sharePlugin()){toast(t('printViaShare'));return generatePDF()}
+  renderA4();await waitForImages(document.getElementById('a4-page'));
+  const w=window.open('','_blank');if(!w){toast(t('shareFailed'));return}
+  w.document.write('<html><head><title>'+esc(currentQuoteNo())+'</title><base href="'+document.baseURI+'"><style>body{margin:0}@page{size:A4;margin:0}</style></head><body>'+document.getElementById('a4-page').outerHTML+'</body></html>');
+  w.document.close();setTimeout(()=>{w.focus();w.print()},400);
+}
+
+// ═══════════════ OFFLINE BACKUP ═══════════════
+// A .json file the user keeps anywhere (WhatsApp, Drive app, phone storage) and restores from on any phone.
+function offlineLastText(){const s=localStorage.getItem('srw_offline_last');return s?tf('offlineLast',{t:new Date(s).toLocaleString(locale(),{day:'numeric',month:'short',hour:'numeric',minute:'2-digit'})}):t('offlineNever')}
+// Merges a backup file into this phone: newest edit of each quote wins,
+// deleted quotes stay deleted, newer settings win, and the next quote number never goes backwards.
+function mergeBackupData(remote){
+  const deleted=getDeleted();
+  Object.entries(remote.deleted||{}).forEach(([id,at])=>{if(String(at)>String(deleted[id]||''))deleted[id]=at});
+  setDeleted(deleted);
+  if(Array.isArray(remote.history)){
+    const merged=new Map();
+    remote.history.forEach(e=>merged.set(String(e.id),e));
+    quotes.forEach(e=>{const k=String(e.id),old=merged.get(k);if(!old||String(e.updatedAt||'')>=String(old.updatedAt||''))merged.set(k,e)});
+    Object.keys(deleted).forEach(id=>merged.delete(id));
+    quotes=[...merged.values()].sort((a,b)=>Number(b.id)-Number(a.id));
+    persistQuotes();
+  }
+  const remoteStamp=remote.settingsUpdatedAt||'',localStamp=localStorage.getItem('srw_settings_updated')||'';
+  if(remote.settings&&remoteStamp>localStamp){
+    settings={...DEFAULT_SETTINGS,...settings,...remote.settings,quotNum:Math.max(settings.quotNum||1,remote.settings.quotNum||1)};
+    localStorage.setItem('srw_settings',JSON.stringify(settings));localStorage.setItem('srw_settings_updated',remoteStamp);
+  }else if((remote.settings?.quotNum||0)>settings.quotNum){settings.quotNum=remote.settings.quotNum;saveSettings()}
+  ensureQuotNumAboveHistory();
+}
+function backupPayload(){return {app:'raya-wood-works',schemaVersion:3,updatedAt:new Date().toISOString(),history:quotes,deleted:getDeleted(),settings,settingsUpdatedAt:localStorage.getItem('srw_settings_updated')||new Date().toISOString()}}
+
+async function exportBackupFile(){
+  try{
+    const blob=new Blob([JSON.stringify(backupPayload())],{type:'application/json'});
+    const name='raya-backup-'+localISODate(new Date())+'.json';
+    const how=await saveOrShareFile(blob,name,'application/json');
+    localStorage.setItem('srw_offline_last',new Date().toISOString());
+    render();
+    if(how==='downloaded')toast(t('offlineSaved'));
+  }catch(e){toast(e.message||t('shareFailed'))}
+}
+function pickBackupFile(){document.getElementById('backup-file').click()}
+function importBackupFile(input){
+  const f=input.files&&input.files[0];input.value='';
+  if(!f)return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    let data;
+    try{data=JSON.parse(String(reader.result))}catch(e){toast(t('offlineBadFile'));return}
+    if(!data||!Array.isArray(data.history)){toast(t('offlineBadFile'));return}
+    const when=data.updatedAt?new Date(data.updatedAt).toLocaleString(locale(),{day:'numeric',month:'short',year:'numeric',hour:'numeric',minute:'2-digit'}):'?';
+    if(!confirm(tf('offlineConfirm',{n:data.history.length,d:when})))return;
+    const before=new Set(quotes.map(e=>String(e.id)));
+    mergeBackupData(data);
+    const added=quotes.filter(e=>!before.has(String(e.id))).length;
+    q=null;render();
+    toast(tf('offlineRestored',{n:added}));
+  };
+  reader.onerror=()=>toast(t('offlineBadFile'));
+  reader.readAsText(f);
+}
+// ═══════════════ APP UPDATES (GitHub Releases) ═══════════════
+// Each push to GitHub builds a signed APK release (tag v<versionCode>). The installed app compares
+// its own versionCode with the latest release and offers to download and install the new APK.
+const UPDATE_REPO='Muthu1203-abi/raya-wood-works';
+let appVersion=null,pendingUpdate=null,updateBusy=false;
+function updaterPlugin(){return window.SRWUpdater||window.Capacitor?.Plugins?.Updater}
+async function getAppVersion(){
+  if(appVersion)return appVersion;
+  const p=updaterPlugin();
+  if(p&&isNativeApp()){try{appVersion=await p.getVersion()}catch(e){}}
+  return appVersion;
+}
+async function checkForUpdate(manual){
+  const v=await getAppVersion();
+  if(!v){if(manual)toast(t('updateOnlyApp'));return}
+  if(manual)toast(t('updateChecking'));
+  try{
+    const res=await fetch('https://api.github.com/repos/'+UPDATE_REPO+'/releases/latest',{headers:{Accept:'application/vnd.github+json'},cache:'no-store'});
+    if(!res.ok)throw new Error('GitHub '+res.status);
+    const rel=await res.json();
+    const code=parseInt(String(rel.tag_name||'').replace(/\D/g,''),10)||0;
+    const apk=(rel.assets||[]).find(a=>/\.apk$/i.test(a.name));
+    if(!apk||code<=Number(v.versionCode)){if(manual)toast(t('updateNone'));return}
+    pendingUpdate={code,name:rel.name||rel.tag_name,notes:String(rel.body||'').trim(),url:apk.browser_download_url,size:+apk.size||0};
+    if(route==='settings')render();
+    showUpdateSheet();
+  }catch(e){if(manual)toast(t('updateFailed'))}
+}
+function showUpdateSheet(){
+  if(!pendingUpdate||overlay)return;
+  const u=pendingUpdate;
+  openSheet(`<h3><i class="ti ti-download" style="color:var(--gold)"></i> ${esc(t('updateTitle'))}</h3>
+    <div class="m">${esc(tf('updateVersion',{v:u.name}))}${u.size?' · '+(u.size/1048576).toFixed(1)+' MB':''}</div>
+    ${u.notes?`<div class="card mt12" style="white-space:pre-wrap;font-size:13px;max-height:180px;overflow:auto;margin-bottom:0">${esc(u.notes)}</div>`:''}
+    <div class="m mt8">${esc(t('updateSafe'))}</div>
+    <div id="upd-progress" style="display:none" class="mt12"><div class="progress"><div id="upd-bar" style="width:0%"></div></div><div class="m mt4" id="upd-text"></div></div>
+    <button class="btn btn-gold mt12" id="upd-btn" onclick="startUpdate()"><i class="ti ti-download"></i>${esc(t('updateDownload'))}</button>
+    <button class="btn mt8" style="color:var(--sub)" onclick="closeOverlay()">${esc(t('updateLater'))}</button>`);
+}
+async function startUpdate(){
+  const p=updaterPlugin();if(!p||!pendingUpdate||updateBusy)return;
+  const btn=document.getElementById('upd-btn'),box=document.getElementById('upd-progress'),bar=document.getElementById('upd-bar'),txt=document.getElementById('upd-text');
+  let listener=null;
+  try{
+    const perm=await p.canInstall();
+    // Android asks once: "Allow installs from this app". After allowing, the user comes back and taps again.
+    if(!perm.allowed){toast(t('updateAllow'));await p.openInstallSettings();return}
+    updateBusy=true;btn.disabled=true;btn.style.opacity='.6';box.style.display='block';txt.textContent=tf('updateProgress',{p:0});
+    listener=await p.addListener('downloadProgress',d=>{bar.style.width=d.percent+'%';txt.textContent=tf('updateProgress',{p:d.percent})});
+    await p.downloadAndInstall({url:pendingUpdate.url});
+    bar.style.width='100%';txt.textContent=t('updateInstalling');
+  }catch(e){toast(e.message||t('updateFailed'));box.style.display='none'}
+  finally{updateBusy=false;if(btn){btn.disabled=false;btn.style.opacity=''}if(listener)listener.remove()}
+}
+
+// ═══════════════ TOAST + INIT ═══════════════
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2600)}
+// Hide the fixed bottom bars while the keyboard is up so they don't cover the field being typed in.
+document.addEventListener('focusin',e=>{if(e.target.matches('input:not([type=checkbox]):not([type=radio]),textarea'))document.body.classList.add('kb')});
+document.addEventListener('focusout',()=>setTimeout(()=>{const a=document.activeElement;if(!a||!a.matches('input,textarea'))document.body.classList.remove('kb')},80));
+
+function init(){
+  loadData();
+  document.documentElement.lang=language;
+  history.replaceState(null,'','#/home'); // the app always starts at Home, so Back from any page ends here
+  render();
+  setTimeout(()=>checkForUpdate(false),1500);
+}
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+# Every push to main builds a signed APK and publishes it as a GitHub Release.
+# The installed app checks the latest release on start and offers "Download update".
+name: Build and release APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # versionCode must grow with every release so phones see it as newer (first installed APK is 1).
+      - name: Version numbers
+        run: |
+          CODE=$(( ${{ github.run_number }} + 1 ))
+          echo "VERSION_CODE=$CODE" >> "$GITHUB_ENV"
+          echo "VERSION_NAME=1.0.$CODE" >> "$GITHUB_ENV"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Install and sync web app into Android
+        run: |
+          npm ci
+          npx cap sync android
+
+      # Sign with the same key as the APK already on the phones, so updates install over it (data kept).
+      - name: Signing key
+        env:
+          KEYSTORE_B64: ${{ secrets.SIGNING_KEYSTORE_B64 }}
+        run: |
+          if [ -z "$KEYSTORE_B64" ]; then echo "Missing SIGNING_KEYSTORE_B64 secret"; exit 1; fi
+          mkdir -p ~/.android
+          echo "$KEYSTORE_B64" | base64 --decode > ~/.android/debug.keystore
+
+      - name: Build APK
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+          cp app/build/outputs/apk/debug/app-debug.apk "../raya-wood-works-$VERSION_NAME.apk"
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
+        run: |
+          NOTES="${COMMIT_MSG:-New version}"
+          gh release create "v$VERSION_CODE" "raya-wood-works-$VERSION_NAME.apk" \
+            --title "Raya Wood Works $VERSION_NAME" \
+            --notes "$NOTES" \
+            --latest

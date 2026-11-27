@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Only these app-cache folders are exposed: shared PDFs/images/backups, and downloaded update APKs. -->
+    <cache-path name="shared" path="shared/" />
+    <cache-path name="updates" path="updates/" />
+</paths>
