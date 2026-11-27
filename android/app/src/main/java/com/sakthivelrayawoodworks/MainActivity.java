@@ -3,6 +3,7 @@ package com.sakthivelrayawoodworks;
 import android.webkit.WebView;
 import androidx.activity.OnBackPressedCallback;
 import com.getcapacitor.BridgeActivity;
+import com.sakthivelrayawoodworks.backup.AutoBackupPlugin;
 import com.sakthivelrayawoodworks.share.PdfSharePlugin;
 import com.sakthivelrayawoodworks.update.UpdaterPlugin;
 
@@ -11,6 +12,7 @@ public class MainActivity extends BridgeActivity {
     public void onCreate(android.os.Bundle savedInstanceState) {
         registerPlugin(PdfSharePlugin.class);
         registerPlugin(UpdaterPlugin.class);
+        registerPlugin(AutoBackupPlugin.class);
         super.onCreate(savedInstanceState);
 
         // Let the web app handle the Android back button first (close sheet/sidebar, go to previous page).
