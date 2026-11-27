@@ -17,7 +17,23 @@ android {
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    // CI passes the app's signing key (the same key as the APK installed on the phones) in SIGNING_STORE_FILE,
+    // so every release installs over the existing app and keeps its data. Local builds use the normal debug key.
+    def ciKeystore = System.getenv("SIGNING_STORE_FILE")
+    signingConfigs {
+        if (ciKeystore) {
+            appKey {
+                storeFile file(ciKeystore)
+                storePassword System.getenv("SIGNING_STORE_PASSWORD") ?: "android"
+                keyAlias System.getenv("SIGNING_KEY_ALIAS") ?: "androiddebugkey"
+                keyPassword System.getenv("SIGNING_KEY_PASSWORD") ?: "android"
+            }
+        }
+    }
     buildTypes {
+        debug {
+            if (ciKeystore) signingConfig signingConfigs.appKey
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
