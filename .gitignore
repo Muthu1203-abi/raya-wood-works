@@ -2,7 +2,7 @@ node_modules/
 *.log
 
 # Local-only files (previews, old copies, editor/agent settings)
-backup/
+/backup/
 .claude/
 
 # Signing keys never go in the repo (CI gets the key from a GitHub secret)
