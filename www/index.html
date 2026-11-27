@@ -1214,7 +1214,8 @@ function importBackupFile(input){
 // Each push to GitHub builds a signed APK release (tag v<versionCode>). The installed app compares
 // its own versionCode with the latest release and offers to download and install the new APK.
 const UPDATE_REPO='Muthu1203-abi/raya-wood-works';
-let appVersion=null,pendingUpdate=null,updateBusy=false;
+let appVersion=null,pendingUpdate=null,updateBusy=false,lastUpdateCheck=0;
+const UPDATE_RECHECK_MS=6*60*60*1000; // when the app comes back from the background, ask again at most every 6 hours
 function updaterPlugin(){return window.SRWUpdater||window.Capacitor?.Plugins?.Updater}
 async function getAppVersion(){
   if(appVersion)return appVersion;
@@ -1226,6 +1227,7 @@ async function checkForUpdate(manual){
   const v=await getAppVersion();
   if(!v){if(manual)toast(t('updateOnlyApp'));return}
   if(manual)toast(t('updateChecking'));
+  lastUpdateCheck=Date.now();
   try{
     const res=await fetch('https://api.github.com/repos/'+UPDATE_REPO+'/releases/latest',{headers:{Accept:'application/vnd.github+json'},cache:'no-store'});
     if(!res.ok)throw new Error('GitHub '+res.status);
@@ -1233,11 +1235,17 @@ async function checkForUpdate(manual){
     const code=parseInt(String(rel.tag_name||'').replace(/\D/g,''),10)||0;
     const apk=(rel.assets||[]).find(a=>/\.apk$/i.test(a.name));
     if(!apk||code<=Number(v.versionCode)){if(manual)toast(t('updateNone'));return}
-    pendingUpdate={code,name:rel.name||rel.tag_name,notes:String(rel.body||'').trim(),url:apk.browser_download_url,size:+apk.size||0};
+    pendingUpdate={code,name:rel.name||rel.tag_name,notes:String(rel.body||'').trim().split(String.fromCharCode(10))[0].trim(),url:apk.browser_download_url,size:+apk.size||0};
     if(route==='settings')render();
-    showUpdateSheet();
+    // Automatic checks never interrupt someone in the middle of writing a quotation.
+    if(manual||route!=='edit')showUpdateSheet();
   }catch(e){if(manual)toast(t('updateFailed'))}
 }
+// Android often keeps the app in the background instead of closing it, so a "Later" would otherwise
+// only come back after a full restart. Re-check when the app is brought back to the screen.
+document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='visible'&&Date.now()-lastUpdateCheck>UPDATE_RECHECK_MS)checkForUpdate(false);
+});
 function showUpdateSheet(){
   if(!pendingUpdate||overlay)return;
   const u=pendingUpdate;
